@@ -26,6 +26,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -33,6 +36,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
+
 
 @Controller
 @SpringBootApplication
@@ -51,6 +55,31 @@ public class Main {
   @RequestMapping("/")
   String index() {
     return "index";
+  }
+
+  @GetMapping("/submitworkorder")
+  String LoadFormWorkItem(Map<String, Object> model) {
+    Workorder workorder = new Workorder();
+    model.put("Workorder", workorder);
+    return "submitworkorder";
+  }
+
+  @PostMapping(path = "/submitorder", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String handlePositionSubmit(Map<String, Object> model,Workorder workorder) throws Exception {
+    // Establishing connection with database
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      stmt.executeUpdate(
+          "CREATE TABLE IF NOT EXISTS Workorders (id serial,name varchar(20))");
+
+      String sql = "INSERT INTO Employees () VALUES ()";
+      stmt.executeUpdate(sql);
+
+      return "redirect:/index";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
   }
 
   @RequestMapping("/db")

@@ -1,0 +1,15 @@
+<html th:fragment="NavBar">
+  <link rel="stylesheet" href="/stylesheets/NavBar.css" />
+  <body>
+
+  <div class="TopBar">
+    <div class="dropdown">
+
+      <a class="linkbutton" sec:authorize="!isAuthenticated()" th:href="@{/oauth2/authorization/auth0}">Log In</a>
+      <a class="linkbutton" sec:authorize="isAuthenticated()" th:href="@{/submitworkorder}">Submit Workorder</a>
+    </div>
+
+      
+  </div> <!-- TopBar end -->
+</body>
+</html>
