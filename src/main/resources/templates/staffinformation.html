@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+  <title>Staff Information</title>
+</head>
+
+<body>
+  <main>
+  <h1>Add a new staff member's details</h1>
+  <h2>Data of an Employee will be taken from this page and submitted into both 
+        StaffRoles and StaffDetails tables</h2>
+  <h4>Enter the details for the new staff member</h4>
+  <div class="form-data">
+    <form action="#" method="post" th:action="@{/addemployee}" th:object="${Employee}">
+      <div class="form-name">Name<sup>*</sup></div>
+
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="Id" 
+                th:field="*{Id}" placeholder="Id of the employee" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="Name" 
+                th:field="*{Name}" placeholder="Name of the employee" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="PhoneNumber" 
+                th:field="*{PhoneNumber}" placeholder="Phone number of the employee" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="test" id="Role" 
+                th:field="*{Role}" placeholder="Role of the employee" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
+      <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
+    </form>
+  </div>
+  <script type="text/javascript"></script>
+  </main>
+</body>
+</html>
