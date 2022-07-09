@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+  <title>Customer Information</title>
+</head>
+
+<body>
+  <main>
+  <h1>Add a new Customer's details</h1>
+  <h2>Data of an Customer will be taken from this page and submitted into both 
+        Customers and AddressBook tables</h2>
+  <h4>Enter the details for the new Customer</h4>
+  <div class="form-data">
+    <form action="#" method="post" th:action="@{/addcustomer}" th:object="${Customer}">
+      <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
+
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
+                th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="Name" 
+                th:field="*{Name}" placeholder="Name of the Customer" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="Email" 
+                th:field="*{Email}" placeholder="Email of the Customer" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="PhoneNumber" 
+                th:field="*{PhoneNumber}" placeholder="Phone number of the Customer" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="Address" 
+                th:field="*{Address}" placeholder="Address of the Customer" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
+      <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
+    </form>
+  </div>
+  <script type="text/javascript"></script>
+  </main>
+</body>
+</html>
