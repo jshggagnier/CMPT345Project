@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+  <title>Certifications Information</title>
+</head>
+
+<body>
+  <main>
+  <h1>Add a new Certifications's details</h1>
+  <h2></h2>
+  <h4>Enter the details for the new Certifications</h4>
+  <div class="form-data">
+    <form action="#" method="post" th:action="@{/addcertifications}" th:object="${Certification}">
+      <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
+
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
+                th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="CertificationName" 
+                th:field="*{CertificationName}" placeholder="Name of the Certification" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateObtained" 
+                th:field="*{DateObtained}" placeholder="Date Obtained of the Certification" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="date" id="ExpiryDate" 
+                th:field="*{ExpiryDate}" placeholder="Expiry Date of the Certification" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="TechnicianID" 
+                th:field="*{TechnicianID}" placeholder="Technician Id on the Certification" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
+      <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
+      <input style="font-family: Quicksand, sans-serif;" type="submit" value="Add a Technician" />
+    </form>
+  </div>
+  <script type="text/javascript"></script>
+  </main>
+</body>
+</html>
