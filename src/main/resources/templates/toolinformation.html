@@ -12,29 +12,23 @@
     crossorigin="anonymous"
   >
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
-  <title>Part Information</title>
+  <title>Tool Information</title>
 </head>
 
 <body>
   <main>
-  <h1>Add a new Part's details</h1>
+  <h1>Add a new Tool's details</h1>
   <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
-  <h2>Data of an Part will be taken from this page and submitted into both 
-        PartList and PartDesciption tables</h2>
-  <h4>Enter the details for the new Part</h4>
+  <h4>Enter the details for the new Tool</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addpart}" th:object="${Part}">
+    <form action="#" method="post" th:action="@{/addtool}" th:object="${Tool}">
       <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
 
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="PartID" 
-                th:field="*{PartID}" placeholder="Id of the Part" required />
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="ToolID" 
+                th:field="*{ToolID}" placeholder="Id of the Tool" required />
       <br>
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="PartName" 
-                th:field="*{PartName}" placeholder="Name of the Part" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="PartDescription" 
-                th:field="*{PartDescription}" placeholder="Description of the Part" required />
-      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="ToolName" 
+                th:field="*{ToolName}" placeholder="Name of the Tool" required />
 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">

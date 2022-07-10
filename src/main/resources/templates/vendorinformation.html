@@ -6,23 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
-  <title>Warranty Claim Information</title>
+  <title>Vendor Information</title>
 </head>
 
 <body>
   <main>
-  <h1>Add a new Warranty Claim's details</h1>
+  <h1>Add a new Vendor's details</h1>
   <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
-  <h4>Enter the details for the new Warranty Claim</h4>
+  <h4>Enter the details for the new Vendor</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addwarrantyclaim}" th:object="${WarrantyClaim}">
+    <form action="#" method="post" th:action="@{/addvendor}" th:object="${Vendor}">
       <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
 
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="WarrantyID" 
-                th:field="*{WarrantyID}" placeholder="Id of the Warranty" required />
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="VendorName" 
+                th:field="*{VendorName}" placeholder="Name of the Vendor" required />
       <br>
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="Brand" 
-                th:field="*{Brand}" placeholder="Brand of the Warranty" required />
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="EmailContact" 
+                th:field="*{EmailContact}" placeholder="Contact Information of the Vendor" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="BillingShippingAddress" 
+                th:field="*{BillingShippingAddress}" placeholder="Billing and Shipping Address of the Part" required />
       <br>
 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
