@@ -12,31 +12,23 @@
     crossorigin="anonymous"
   >
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
-  <title>Staff Information</title>
+  <title>Warranty Divison Information</title>
 </head>
 
 <body>
   <main>
-  <h1>Add a new staff member's details</h1>
+  <h1>Add a new Warranty Divison's details</h1>
   <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
-  <h2>Data of an Employee will be taken from this page and submitted into both 
-        StaffRoles and StaffDetails tables</h2>
-  <h4>Enter the details for the new staff member</h4>
+  <h4>Enter the details for the new Warranty Divison</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addemployee}" th:object="${Employee}">
+    <form action="#" method="post" th:action="@{/addwarrantydivison}" th:object="${WarrantyDivison}">
       <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
 
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="Id" 
-                th:field="*{Id}" placeholder="Id of the employee" required />
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="Brand" 
+                th:field="*{Brand}" placeholder="Brand of the Warranty Divison" required />
       <br>
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="Name" 
-                th:field="*{Name}" placeholder="Name of the employee" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="PhoneNumber" 
-                th:field="*{PhoneNumber}" placeholder="Phone number of the employee" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="Role" 
-                th:field="*{Role}" placeholder="Role of the employee" required />
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="EmailContact" 
+                th:field="*{EmailContact}" placeholder="Contact Information of the Warranty Divison" required />
       <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">

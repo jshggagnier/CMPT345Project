@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}">
 
-</html>
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+    crossorigin="anonymous"
+  >
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
-  <title>Submit New Workorder</title>
+  <title>Submit Work Order</title>
 </head>
 
 <body>
-  <h1>Submit a Workorder</h1>
+  <main>
+  <h1>Add a new Work Order's details</h1>
   <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
-  <h4>Enter the details for the new Workorder</h4>
+  <h4>Enter the details for the new Work Order</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/submitorder}" th:object="${Workorder}">
-      <div class="form-name">Name<sup>*</sup></div>
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="Name" th:field="*{Name}" placeholder="Name of the workorder" required />
+    <form action="#" method="post" th:action="@{/addworkorder}" th:object="${WorkOrder}">
+      <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
+
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNumber" 
+                th:field="*{OrderNumber}" placeholder="Order Number of the Work Order" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" 
+                th:field="*{DateSubmitted}" placeholder="Date Submitted the Work Order" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateCompleted" 
+                th:field="*{DateCompleted}" placeholder="Date Completed the Work Order" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
+                th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="ClaimID" 
+                th:field="*{ClaimID}" placeholder="Id of the Warranty Claim" required />
+      <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
   </div>
-  <script type="text/javascript">
-   
+  </main>
+  <script type="text/javascript"></script>
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" 
+    crossorigin="anonymous">
   </script>
 </body>
-
 </html>
