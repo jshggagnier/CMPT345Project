@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}"></html>
 
 <head>
   <meta charset="UTF-8">
@@ -18,27 +18,13 @@
 <body>
   <main>
   <h1>Add a new Work Order's details</h1>
-  <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
   <h4>Enter the details for the new Work Order</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addworkorder}" th:object="${WorkOrder}">
-      <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
-
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNumber" 
-                th:field="*{OrderNumber}" placeholder="Order Number of the Work Order" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" 
-                th:field="*{DateSubmitted}" placeholder="Date Submitted the Work Order" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateCompleted" 
-                th:field="*{DateCompleted}" placeholder="Date Completed the Work Order" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
-                th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="ClaimID" 
-                th:field="*{ClaimID}" placeholder="Id of the Warranty Claim" required />
-      <br>
+    <form action="#" method="post" th:action="@{/workOrderSubmitForm}" th:object="${WorkOrder}">
+      <div class="form-name">Start Date: <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" th:field="*{StartDate}" placeholder="Date Submitted the Work Order" required /></div>
+      <div class="form-name">CustName: <input style="font-family: Quicksand, sans-serif;" type="text" id="CustName" th:field="*{CustomerName}" placeholder="Date Submitted the Work Order" required /></div>
+      <div class="form-name">Description of Fault: <input style="font-family: Quicksand, sans-serif;" type="text" id="CustName" th:field="*{Description}" placeholder="Date Submitted the Work Order" required /></div>
+      <div class="form-name">ClaimID: <input style="font-family: Quicksand, sans-serif;" type="text" id="ClaimID" th:field="*{ClaimID}" placeholder="Date Submitted the Work Order" required /></div>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
