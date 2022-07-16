@@ -24,20 +24,23 @@
   <h4>Enter the details for the new Customer</h4>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/addcustomer}" th:object="${Customer}">
-      <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
-
+      <div class="form-name">Id</div> 
       <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
                 th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
       <br>
+      <div class="form-name">Name</div> 
       <input style="font-family: Quicksand, sans-serif;" type="text" id="Name" 
                 th:field="*{Name}" placeholder="Name of the Customer" required />
       <br>
+      <div class="form-name">Email</div> 
       <input style="font-family: Quicksand, sans-serif;" type="text" id="Email" 
                 th:field="*{Email}" placeholder="Email of the Customer" required />
       <br>
+      <div class="form-name">Phone Number</div> 
       <input style="font-family: Quicksand, sans-serif;" type="number" id="PhoneNumber" 
                 th:field="*{PhoneNumber}" placeholder="Phone number of the Customer" required />
       <br>
+      <div class="form-name">Address</div> 
       <input style="font-family: Quicksand, sans-serif;" type="text" id="Address" 
                 th:field="*{Address}" placeholder="Address of the Customer" required />
       <br>

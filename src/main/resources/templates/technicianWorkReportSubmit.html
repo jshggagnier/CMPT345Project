@@ -22,20 +22,23 @@
   <h4>Enter the details for the new Technician Work Report</h4>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/addworkreport}" th:object="${WorkReport}">
-      <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
-
+      <div class="form-name">Technician Id</div> 
       <input style="font-family: Quicksand, sans-serif;" type="number" id="StaffID" 
                 th:field="*{StaffID}" placeholder="Id of the Technician" required />
       <br>
+      <div class="form-name">Order Number</div> 
       <input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNumber" 
                 th:field="*{OrderNumber}" placeholder="Order Number of the Work Report" required />
       <br>
+      <div class="form-name">Message</div> 
       <input style="font-family: Quicksand, sans-serif;" type="text" id="Message" 
                 th:field="*{Message}" placeholder="Message of the Work Report" required />
       <br>
+      <div class="form-name">Date</div> 
       <input style="font-family: Quicksand, sans-serif;" type="date" id="Date" 
                 th:field="*{Date}" placeholder="Date of the Work Report" required />
       <br>
+      <div class="form-name">Customer Id</div> 
       <input style="font-family: Quicksand, sans-serif;" type="number" id="CustID" 
                 th:field="*{CustID}" placeholder="Id of the Customer" required />
       <br>
