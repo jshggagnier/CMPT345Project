@@ -48,14 +48,14 @@ public class Main {
   @Autowired
   private DataSource dataSource;
 
-  @GetMapping("/submitworkorder")
+  @GetMapping("/workorderSubmit")
   String LoadFormWorkItem(Map<String, Object> model) {
     Workorder workorder = new Workorder();
     model.put("Workorder", workorder);
     return "submitworkorder";
   }
 
-  @GetMapping("/viewworkorders")
+  @GetMapping("/workordersView")
   String viewworkorders(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
@@ -75,24 +75,23 @@ public class Main {
         dataList.add(obj);
       }
       model.put("WorkItems", dataList);
-      return "WorkItemView";
+      return "workitemView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
   }
 
-  @PostMapping(path = "/submitorder", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  @PostMapping(path = "/workorderSubmit", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
   public String handlePositionSubmit(Map<String, Object> model,Workorder workorder) throws Exception {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (id serial,name varchar(20))");
-
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimNum integer, StartDate varchar(10), EndDate varchar(10), Description varchar(300))");
       String sql = "INSERT INTO Employees () VALUES ()";
       stmt.executeUpdate(sql);
 
-      return "redirect:/vieworders";
+      return "redirect:/workorderView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
