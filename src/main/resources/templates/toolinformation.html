@@ -12,32 +12,23 @@
     crossorigin="anonymous"
   >
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
-  <title>Submit Work Order</title>
+  <title>Tool Information</title>
 </head>
 
 <body>
   <main>
-  <h1>Add a new Work Order's details</h1>
+  <h1>Add a new Tool's details</h1>
   <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
-  <h4>Enter the details for the new Work Order</h4>
+  <h4>Enter the details for the new Tool</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addworkorder}" th:object="${WorkOrder}">
+    <form action="#" method="post" th:action="@{/addtool}" th:object="${Tool}">
       <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
 
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNumber" 
-                th:field="*{OrderNumber}" placeholder="Order Number of the Work Order" required />
+      <input style="font-family: Quicksand, sans-serif;" type="number" id="ToolID" 
+                th:field="*{ToolID}" placeholder="Id of the Tool" required />
       <br>
-      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" 
-                th:field="*{DateSubmitted}" placeholder="Date Submitted the Work Order" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateCompleted" 
-                th:field="*{DateCompleted}" placeholder="Date Completed the Work Order" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
-                th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="ClaimID" 
-                th:field="*{ClaimID}" placeholder="Id of the Warranty Claim" required />
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="ToolName" 
+                th:field="*{ToolName}" placeholder="Name of the Tool" required />
       <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">

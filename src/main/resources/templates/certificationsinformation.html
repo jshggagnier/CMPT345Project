@@ -12,35 +12,36 @@
     crossorigin="anonymous"
   >
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
-  <title>Submit Work Order</title>
+  <title>Certifications Information</title>
 </head>
 
 <body>
   <main>
-  <h1>Add a new Work Order's details</h1>
+  <h1>Add a new Certifications's details</h1>
   <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
-  <h4>Enter the details for the new Work Order</h4>
+  <h4>Enter the details for the new Certifications</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addworkorder}" th:object="${WorkOrder}">
+    <form action="#" method="post" th:action="@{/addcertifications}" th:object="${Certification}">
       <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
 
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNumber" 
-                th:field="*{OrderNumber}" placeholder="Order Number of the Work Order" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" 
-                th:field="*{DateSubmitted}" placeholder="Date Submitted the Work Order" required />
-      <br>
-      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateCompleted" 
-                th:field="*{DateCompleted}" placeholder="Date Completed the Work Order" required />
-      <br>
       <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
                 th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
       <br>
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="ClaimID" 
-                th:field="*{ClaimID}" placeholder="Id of the Warranty Claim" required />
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="CertificationName" 
+                th:field="*{CertificationName}" placeholder="Name of the Certification" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="date" id="DateObtained" 
+                th:field="*{DateObtained}" placeholder="Date Obtained of the Certification" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="date" id="ExpiryDate" 
+                th:field="*{ExpiryDate}" placeholder="Expiry Date of the Certification" required />
+      <br>
+      <input style="font-family: Quicksand, sans-serif;" type="text" id="TechnicianID" 
+                th:field="*{TechnicianID}" placeholder="Technician Id on the Certification" required />
       <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
+      <input style="font-family: Quicksand, sans-serif;" type="submit" value="Add a Technician" />
     </form>
   </div>
   </main>
