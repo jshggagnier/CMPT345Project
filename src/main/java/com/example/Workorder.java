@@ -1,22 +1,57 @@
 package com.example;
 public class Workorder
 {
-    public String Name;
-    public int serialID;
+    private int OrderNum;
+    private int CustomerNum;
+    private int ClaimNum;
+    private String StartDate;
+    private String EndDate;
+    private String Description;
 
-    public int getSerialID() {
-        return this.serialID;
+    public int getClaimNum() {
+        return this.ClaimNum;
     }
 
-    public void setSerialID(int serialID) {
-        this.serialID = serialID;
+    public void setClaimNum(int ClaimNum) {
+        this.ClaimNum = ClaimNum;
     }
 
-    public String getName() {
-        return this.Name;
+    public int getOrderNum() {
+        return this.OrderNum;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setOrderNum(int OrderNum) {
+        this.OrderNum = OrderNum;
+    }
+
+    public int getCustomerNum() {
+        return this.CustomerNum;
+    }
+
+    public void setCustomerNum(int CustomerNum) {
+        this.CustomerNum = CustomerNum;
+    }
+
+    public String getStartDate() {
+        return this.StartDate;
+    }
+
+    public void setStartDate(String StartDate) {
+        this.StartDate = StartDate;
+    }
+
+    public String getEndDate() {
+        return this.EndDate;
+    }
+
+    public void setEndDate(String EndDate) {
+        this.EndDate = EndDate;
+    }
+    public String getDescription() {
+        return this.Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 }

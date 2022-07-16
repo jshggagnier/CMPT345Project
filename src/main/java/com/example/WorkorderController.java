@@ -48,46 +48,54 @@ public class Main {
   @Autowired
   private DataSource dataSource;
 
-  public static void main(String[] args) throws Exception {
-    SpringApplication.run(Main.class, args);
+  @GetMapping("/submitworkorder")
+  String LoadFormWorkItem(Map<String, Object> model) {
+    Workorder workorder = new Workorder();
+    model.put("Workorder", workorder);
+    return "submitworkorder";
   }
 
-  @RequestMapping("/")
-  String index() {
-    return "index";
-  }
-
-
-  @RequestMapping("/db")
-  String db(Map<String, Object> model) {
+  @GetMapping("/viewworkorders")
+  String viewworkorders(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-      stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-      ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
-
-      ArrayList<String> output = new ArrayList<String>();
+      stmt.executeUpdate(
+          "CREATE TABLE IF NOT EXISTS workitems (id serial, itemname varchar(50), startdate DATE, enddate DATE, teams varchar(500), fundinginformation varchar(100))");
+      ResultSet rs = stmt.executeQuery(("SELECT * FROM workitems"));
+      ArrayList<Workorder> dataList = new ArrayList<Workorder>();
       while (rs.next()) {
-        output.add("Read from DB: " + rs.getTimestamp("tick"));
-      }
+        Workorder obj = new Workorder();
+        obj.setItemName(rs.getString("itemname"));
+        obj.setStartDate(rs.getString("startdate"));
+        obj.setEndDate(rs.getString("enddate"));
+        obj.setTeamsAssigned(rs.getString("teams"));
+        obj.setFundingInformation(rs.getString("fundinginformation"));
+        obj.setId(rs.getString("id"));
 
-      model.put("records", output);
-      return "db";
+        dataList.add(obj);
+      }
+      model.put("WorkItems", dataList);
+      return "WorkItemView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
   }
 
-  @Bean
-  public DataSource dataSource() throws SQLException {
-    if (dbUrl == null || dbUrl.isEmpty()) {
-      return new HikariDataSource();
-    } else {
-      HikariConfig config = new HikariConfig();
-      config.setJdbcUrl(dbUrl);
-      return new HikariDataSource(config);
+  @PostMapping(path = "/submitorder", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String handlePositionSubmit(Map<String, Object> model,Workorder workorder) throws Exception {
+    // Establishing connection with database
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (id serial,name varchar(20))");
+
+      String sql = "INSERT INTO Employees () VALUES ()";
+      stmt.executeUpdate(sql);
+
+      return "redirect:/vieworders";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
     }
   }
-
 }
