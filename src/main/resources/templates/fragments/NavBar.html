@@ -1,15 +1,71 @@
 <html th:fragment="NavBar">
-  <link rel="stylesheet" href="/stylesheets/NavBar.css" />
+
+  <head>
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+      crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="/stylesheets/NavBar.css" />
+  </head>
+
   <body>
-
-  <div class="TopBar">
-    <div class="dropdown">
-
-      <a class="linkbutton" sec:authorize="!isAuthenticated()" th:href="@{/oauth2/authorization/auth0}">Log In</a>
-      <a class="linkbutton" sec:authorize="isAuthenticated()" th:href="@{/submitworkorder}">Submit Workorder</a>
-    </div>
-
-      
-  </div> <!-- TopBar end -->
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Database</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Staff Information
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/src/main/resources/templates/staffinformation.html">Staff Information</a></li>
+                <li><a class="dropdown-item" href="/src/main/resources/templates/technicianworkreport.html">Submit a Work Report</a></li>
+                <li><a class="dropdown-item" href="/src/main/resources/templates/certificationsinformation.html">Certifications</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Customer's Work Orders
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/src/main/resources/templates/submitworkorder.html">Work Orders</a></li>
+                <li><a class="dropdown-item" href="/src/main/resources/templates/customerinformation.html">Customer Information</a></li>
+                <li><a class="dropdown-item" href="/src/main/resources/templates/warrantyclaiminformation.html">Warranty Claims</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Item Information
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/src/main/resources/templates/partinformation.html">Parts</a></li>
+                <li><a class="dropdown-item" href="/src/main/resources/templates/toolinformation.html">Tools</a></li>
+                <li><a class="dropdown-item" href="/src/main/resources/templates/usagereport.html">Submit a Usage Report</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Company Information
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/src/main/resources/templates/vendorinformation.html">Vendors</a></li>
+                <li><a class="dropdown-item" href="/src/main/resources/templates/warrantydivisoninformation.html">Warranty Divisions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" 
+    crossorigin="anonymous">
+    </script>
 </body>
 </html>

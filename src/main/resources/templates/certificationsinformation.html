@@ -22,20 +22,23 @@
   <h4>Enter the details for the new Certifications</h4>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/addcertifications}" th:object="${Certification}">
-      <div class="form-name">Name<sup>*</sup></div> <!-- Question: What does this line do? -->
-
+      <div class="form-name">Id</div> 
       <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
                 th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
       <br>
+      <div class="form-name">Name</div> 
       <input style="font-family: Quicksand, sans-serif;" type="text" id="CertificationName" 
                 th:field="*{CertificationName}" placeholder="Name of the Certification" required />
       <br>
+      <div class="form-name">Date Obtained</div> 
       <input style="font-family: Quicksand, sans-serif;" type="date" id="DateObtained" 
                 th:field="*{DateObtained}" placeholder="Date Obtained of the Certification" required />
       <br>
+      <div class="form-name">Expiry Date</div> 
       <input style="font-family: Quicksand, sans-serif;" type="date" id="ExpiryDate" 
                 th:field="*{ExpiryDate}" placeholder="Expiry Date of the Certification" required />
       <br>
+      <div class="form-name">Technician Id</div>
       <input style="font-family: Quicksand, sans-serif;" type="text" id="TechnicianID" 
                 th:field="*{TechnicianID}" placeholder="Technician Id on the Certification" required />
       <br>
