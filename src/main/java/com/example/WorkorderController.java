@@ -40,7 +40,7 @@ import java.util.Map;
 
 @Controller
 @SpringBootApplication
-public class Main {
+public class WorkorderController {
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -48,15 +48,15 @@ public class Main {
   @Autowired
   private DataSource dataSource;
 
-  @GetMapping("/workorderSubmit")
-  String LoadFormWorkItem(Map<String, Object> model) {
+  @GetMapping("/workOrderSubmit")
+  String workOrderSubmit(Map<String, Object> model) {
     Workorder workorder = new Workorder();
-    model.put("Workorder", workorder);
-    return "submitworkorder";
+    model.put("WorkOrder", workorder);
+    return "workOrderSubmit";
   }
 
-  @GetMapping("/workordersView")
-  String viewworkorders(Map<String, Object> model) {
+  @GetMapping("/workOrderView")
+  String viewWorkOrders(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       stmt.executeUpdate(
@@ -65,33 +65,30 @@ public class Main {
       ArrayList<Workorder> dataList = new ArrayList<Workorder>();
       while (rs.next()) {
         Workorder obj = new Workorder();
-        obj.setItemName(rs.getString("itemname"));
         obj.setStartDate(rs.getString("startdate"));
         obj.setEndDate(rs.getString("enddate"));
-        obj.setTeamsAssigned(rs.getString("teams"));
-        obj.setFundingInformation(rs.getString("fundinginformation"));
-        obj.setId(rs.getString("id"));
 
         dataList.add(obj);
       }
       model.put("WorkItems", dataList);
-      return "workitemView";
+      return "workOrderView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
   }
 
-  @PostMapping(path = "/workorderSubmit", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String handlePositionSubmit(Map<String, Object> model,Workorder workorder) throws Exception {
+  @PostMapping(path = "/workOrderSubmitForm", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String handleWorkorderSubmit(Map<String, Object> model,Workorder workorder) throws Exception {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimNum integer, StartDate varchar(10), EndDate varchar(10), Description varchar(300))");
-      String sql = "INSERT INTO Employees () VALUES ()";
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID integer, StartDate varchar(10), EndDate varchar(10), Description varchar(300),CustomerName varchar(100))");
+      String sql = "INSERT INTO Workorders (CustomerNum,ClaimID,StartDate,Description,CustomerName) VALUES (1, '"+workorder.getClaimID()+"', '"+workorder.getStartDate()+"', '"+workorder.getDescription()+"', '"+workorder.getCustomerName()+"')";
+      System.out.println(sql);
       stmt.executeUpdate(sql);
 
-      return "redirect:/workorderView";
+      return "redirect:/workOrderView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";

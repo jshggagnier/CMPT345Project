@@ -1,5 +1,4 @@
 <html th:fragment="NavBar">
-
   <head>
     <link 
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
@@ -24,9 +23,9 @@
                 Staff Information
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/src/main/resources/templates/staffinformation.html">Staff Information</a></li>
-                <li><a class="dropdown-item" href="/src/main/resources/templates/technicianworkreport.html">Submit a Work Report</a></li>
-                <li><a class="dropdown-item" href="/src/main/resources/templates/certificationsinformation.html">Certifications</a></li>
+                <li><a class="dropdown-item" th:href="@{/staffView}">Staff Information</a></li>
+                <li><a class="dropdown-item" th:href="@{/usageReportSubmit}">Submit a Work Report</a></li>
+                <li><a class="dropdown-item" th:href="@{/certificationView}">Certifications</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -34,9 +33,10 @@
                 Customer's Work Orders
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/src/main/resources/templates/submitworkorder.html">Work Orders</a></li>
-                <li><a class="dropdown-item" href="/src/main/resources/templates/customerinformation.html">Customer Information</a></li>
-                <li><a class="dropdown-item" href="/src/main/resources/templates/warrantyclaiminformation.html">Warranty Claims</a></li>
+                <li><a class="dropdown-item" th:href="@{/workOrderView}">Work Orders</a></li>
+                <li><a class="dropdown-item" th:href="@{/workOrderSubmit}">Work Order Submit</a></li>
+                <li><a class="dropdown-item" th:href="@{/customerView}">Customer Information</a></li>
+                <li><a class="dropdown-item" th:href="@{/warrantyClaimSubmit}">Warranty Claims</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -44,9 +44,9 @@
                 Item Information
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/src/main/resources/templates/partinformation.html">Parts</a></li>
-                <li><a class="dropdown-item" href="/src/main/resources/templates/toolinformation.html">Tools</a></li>
-                <li><a class="dropdown-item" href="/src/main/resources/templates/usagereport.html">Submit a Usage Report</a></li>
+                <li><a class="dropdown-item" th:href="@{/partView}">Parts</a></li>
+                <li><a class="dropdown-item" th:href="@{/toolView}">Tools</a></li>
+                <li><a class="dropdown-item" th:href="@{/usageReportSubmit}">Submit a Usage Report</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -54,8 +54,8 @@
                 Company Information
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/src/main/resources/templates/vendorinformation.html">Vendors</a></li>
-                <li><a class="dropdown-item" href="/src/main/resources/templates/warrantydivisoninformation.html">Warranty Divisions</a></li>
+                <li><a class="dropdown-item" th:href="@{/vendorView}">Vendors</a></li>
+                <li><a class="dropdown-item" th:href="@{/warrantyDivsisionView}">Warranty Divisions</a></li>
               </ul>
             </li>
           </ul>

@@ -3,17 +3,26 @@ public class Workorder
 {
     private int OrderNum;
     private int CustomerNum;
-    private int ClaimNum;
+    private String ClaimID;
     private String StartDate;
     private String EndDate;
     private String Description;
+    private String CustomerName;
 
-    public int getClaimNum() {
-        return this.ClaimNum;
+    public String getCustomerName() {
+        return this.CustomerName;
     }
 
-    public void setClaimNum(int ClaimNum) {
-        this.ClaimNum = ClaimNum;
+    public void setCustomerName(String CustomerName) {
+        this.CustomerName = CustomerName;
+    }
+
+    public String getClaimID() {
+        return this.ClaimID;
+    }
+
+    public void setClaimID(String ClaimID) {
+        this.ClaimID = ClaimID;
     }
 
     public int getOrderNum() {
