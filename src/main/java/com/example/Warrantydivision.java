@@ -20,5 +20,4 @@ public class Warrantydivision
         this.EmailContact = EmailContact;
     }
 
-
 }
