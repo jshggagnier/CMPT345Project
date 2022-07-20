@@ -4,7 +4,7 @@ public class Customer {
     private int CustIdentifier;
     private String Name;
     private String Email;
-    private int PhoneNumber;
+    private String PhoneNumber;
     private String Address;
 
     public int getCustIdentifier() {
@@ -31,11 +31,11 @@ public class Customer {
         this.Email = Email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return this.PhoneNumber;
     }
 
-    public void setPhoneNumber(int PhoneNumber) {
+    public void setPhoneNumber(String PhoneNumber) {
         this.PhoneNumber = PhoneNumber;
     }
 

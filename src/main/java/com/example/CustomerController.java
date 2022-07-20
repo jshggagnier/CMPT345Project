@@ -40,7 +40,7 @@ import java.util.Map;
 
 @Controller
 @SpringBootApplication
-public class WorkorderController {
+public class CustomerController {
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -48,11 +48,15 @@ public class WorkorderController {
   @Autowired
   private DataSource dataSource;
 
-  @GetMapping("/workOrderSubmit")
-  String workOrderSubmit(Map<String, Object> model) {
-    Workorder workorder = new Workorder();
-    model.put("WorkOrder", workorder);
+  @GetMapping("/customerSubmit")
+  String customerSubmit(Map<String, Object> model) {
+    Customer Customer = new Customer();
+    model.put("Customer", Customer);
+    return "customerSubmit";
+  }
 
+  @GetMapping("/customerView")
+  String viewcustomers(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
@@ -68,73 +72,45 @@ public class WorkorderController {
         dataList.add(obj);
       }
       model.put("Customers", dataList);
-      return "workOrderSubmit";
+      return "customerView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
   }
 
-  @GetMapping("/workOrderView")
-  String viewWorkOrders(Map<String, Object> model) {
-    try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID integer, StartDate varchar(10), EndDate varchar(10), Description varchar(300))");
-      ResultSet rs = stmt.executeQuery(("SELECT * FROM Workorders"));
-      ArrayList<Workorder> dataList = new ArrayList<Workorder>();
-      while (rs.next()) {
-        Workorder obj = new Workorder();
-        obj.setOrderNum(rs.getInt("OrderNum"));
-        obj.setStartDate(rs.getString("startdate"));
-        obj.setEndDate(rs.getString("enddate"));
-        obj.setClaimID(rs.getString("ClaimID"));
-        obj.setDescription(rs.getString("Description"));
-        obj.setCustomerNum(rs.getInt("CustomerNum"));
-        dataList.add(obj);
-      }
-      model.put("WorkOrders", dataList);
-      return "workOrderView";
-    } catch (Exception e) {
-      model.put("message", e.getMessage());
-      return "error";
-    }
-  }
-
-  @PostMapping(path = "/workOrderSubmitForm", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
-  public String handleWorkorderSubmit(Map<String, Object> model,Workorder workorder) throws Exception {
+  @PostMapping(path = "/customerSubmitForm", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String handlecustomerSubmit(Map<String, Object> model,Customer Customer) throws Exception {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
-      //by now we have verified the customer exists
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID integer, StartDate varchar(10), EndDate varchar(10), Description varchar(300))");
-      String sql = "INSERT INTO Workorders (CustomerNum,ClaimID,StartDate,Description) VALUES ("+workorder.getCustomerNum()+", '"+workorder.getClaimID()+"', '"+workorder.getStartDate()+"', '"+workorder.getDescription()+"')";
+      String sql = "INSERT INTO customers (Name, Email, PhoneNumber, Address) VALUES ('"+Customer.getName()+"', '"+Customer.getEmail()+"', '"+Customer.getPhoneNumber()+"', '"+Customer.getAddress()+"')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
 
-      return "redirect:/workOrderView";
+      return "redirect:/customerView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
     }
   }
 
-  @GetMapping("/WorkOrderEdit/{nid}")
-  String LoadFormWorkOrderEdit(Map<String, Object> model, @PathVariable String nid) {
+  @GetMapping("/customerEdit/{nid}")
+  String LoadFormcustomerEdit(Map<String, Object> model, @PathVariable String nid) {
       try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery(("SELECT * FROM Workorders WHERE OrderNum = " + nid)); // this should only ever run once, since OrderNum is serial
-      Workorder obj = new Workorder();
+      ResultSet rs = stmt.executeQuery(("SELECT * FROM customers WHERE OrderNum = " + nid)); // this should only ever run once, since OrderNum is serial
+      Customer obj = new Customer();
       while (rs.next()) {
-        obj.setOrderNum(rs.getInt("OrderNum"));
-        obj.setStartDate(rs.getString("startdate"));
-        obj.setEndDate(rs.getString("enddate"));
-        obj.setClaimID(rs.getString("ClaimID"));
-        obj.setDescription(rs.getString("Description"));
-        obj.setCustomerNum(rs.getInt("CustomerNum"));
+        obj.setCustIdentifier(rs.getInt("CustIdentifier"));
+        obj.setName(rs.getString("Name"));
+        obj.setEmail(rs.getString("Email"));
+        obj.setPhoneNumber(rs.getString("PhoneNumber"));
+        obj.setAddress(rs.getString("Address"));
       }
-      model.put("WorkOrder", obj);
-      return "WorkOrderEdit";
+      model.put("Customer", obj);
+      return "customerEdit";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";

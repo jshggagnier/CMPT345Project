@@ -7,7 +7,7 @@ public class Workorder
     private String StartDate;
     private String EndDate;
     private String Description;
-    private String CustomerName;
+    private String CustomerName; // this will be removed shortly, once customers are added properly
 
     public String getCustomerName() {
         return this.CustomerName;
