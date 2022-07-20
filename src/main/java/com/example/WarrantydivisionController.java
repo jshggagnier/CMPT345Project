@@ -48,13 +48,49 @@ public class WarrantydivisionController {
   @Autowired
   private DataSource dataSource;
 
-  @RequestMapping("/warrantyDivisionSubmit")
-  String WarrantyDivisionSubmit() {
+  @GetMapping("/warrantyDivisionSubmit")
+  String warrantyDivisionSubmit(Map<String, Object> model) {
+    Warrantydivision warrantydivision = new Warrantydivision();
+    model.put("WarrantyDivision", warrantydivision);
     return "warrantyDivisionSubmit";
   }
 
-  @RequestMapping("/warrantyDivisionView")
-  String WarrantyDivisionView() {
-    return "warrantyDivisionView";
+  @GetMapping("/warrantyDivisionView")
+  String WarrantyDivisionView(Map<String, Object> model) {
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyDivisions (Brand varchar(30), EmailContact varchar(30))");
+      ResultSet rs = stmt.executeQuery(("SELECT * FROM WarrantyDivisions"));
+      ArrayList<Warrantydivision> dataList = new ArrayList<Warrantydivision>();
+      while (rs.next()) {
+        Warrantydivision obj = new Warrantydivision();
+        obj.setBrand(rs.getString("Brand"));
+        obj.setEmailContact(rs.getString("EmailContact"));
+        dataList.add(obj);
+      }
+      model.put("WarrantyDivisions", dataList);
+      return "warrantyDivisionView";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
   }
+
+  @PostMapping(path = "/warrantyDivisionSubmitForm", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String handlewarrantyDivisionSubmit(Map<String, Object> model,Warrantydivision WarrantyDivision) throws Exception {
+    // Establishing connection with database
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyDivisions (Brand varchar(30), EmailContact varchar(30))");
+      String sql = "INSERT INTO WarrantyDivisions (Brand, EmailContact) VALUES ('"+WarrantyDivision.getBrand()+"', '"+WarrantyDivision.getEmailContact()+"')";
+      System.out.println(sql);
+      stmt.executeUpdate(sql);
+
+      return "redirect:/warrantyDivisionView";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+  }
+
 }

@@ -12,14 +12,52 @@
     crossorigin="anonymous"
   >
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+
+  <!--Font & Icon import-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Google font Quicksand-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  
+  <style>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    html {
+      scrollbar-width: none;
+    }
+  </style>
+
   <title>View Warranty Divisions</title>
 </head>
 
-<body>
-  <main>
-  <h1>View Warranty Divisions</h1>
-  
-  </main>
+<body style="font-family: Quicksand, sans-serif;">
+  <div class="db-container">
+    <h1 style="font-weight: bolder;">View Warranty Divisions</h1><br>
+
+    <table id="WarrantyDivisionViewTable"class="styled-table">
+      <tr class="table-header" style="color: rgb(0, 0, 0);">
+        <th class="header-name">Brand |</th>
+        <th class="header-name" >EmailContact </th>
+        
+        <tr th:each="n:${Warrantydivison}">
+          <td th:text="${n.Brand}"></td>
+          <td th:text="${n.EmailContact}"></td>
+
+          <td>
+            <form th:action="@{}">
+              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
+            </form>
+          </td>
+        </tr>
+        
+    </table>
+  </div>
   <script type="text/javascript"></script>
 </body>
 </html>
