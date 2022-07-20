@@ -59,18 +59,20 @@ public class WorkorderController {
   String viewWorkOrders(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate(
-          "CREATE TABLE IF NOT EXISTS workitems (id serial, itemname varchar(50), startdate DATE, enddate DATE, teams varchar(500), fundinginformation varchar(100))");
-      ResultSet rs = stmt.executeQuery(("SELECT * FROM workitems"));
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID integer, StartDate varchar(10), EndDate varchar(10), Description varchar(300),CustomerName varchar(100))");
+      ResultSet rs = stmt.executeQuery(("SELECT * FROM Workorders"));
       ArrayList<Workorder> dataList = new ArrayList<Workorder>();
       while (rs.next()) {
         Workorder obj = new Workorder();
+        obj.setOrderNum(rs.getInt("OrderNum"));
         obj.setStartDate(rs.getString("startdate"));
         obj.setEndDate(rs.getString("enddate"));
-
+        obj.setClaimID(rs.getString("ClaimID"));
+        obj.setDescription(rs.getString("Description"));
+        obj.setCustomerName(rs.getString("CustomerName"));
         dataList.add(obj);
       }
-      model.put("WorkItems", dataList);
+      model.put("WorkOrders", dataList);
       return "workOrderView";
     } catch (Exception e) {
       model.put("message", e.getMessage());

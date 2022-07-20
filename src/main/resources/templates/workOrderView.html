@@ -42,16 +42,23 @@
 
     <table id="WorkOrderViewTable"class="styled-table">
       <tr class="table-header" style="color: rgb(0, 0, 0);">
-        <th class="header-name">Claim ID |</th>
+        <th class="header-name">Order Number |</th>
         <th class="header-name" >Customer Name |</th>
         <th class="header-name">Start Date |</th>
-        <th class="header-name">Description</th>
+        <th class="header-name">Description |</th>
+        <th class="header-name">Claim ID</th>
         
-        <tr th:each="n:${WorkOrder}" action="#" method="get" th:action="@{/workOrderView}">
-          <td th:text="${n.ClaimID}"></td>
+        <tr th:each="n:${WorkOrders}">
+          <td th:text="${n.OrderNum}"></td>
           <td th:text="${n.CustomerName}"></td>
           <td th:text="${n.StartDate}"></td>
           <td th:text="${n.Description}"></td>
+          <td th:text="${n.ClaimID}"></td>
+          <td>
+            <form th:action="@{/WorkOrderEdit/{ClaimID}(ClaimID=${n.ClaimID})}">
+              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
+            </form>
+          </td>
         </tr>
         
     </table>
