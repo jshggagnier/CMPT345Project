@@ -12,23 +12,23 @@
     crossorigin="anonymous"
   >
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
-  <title>Warranty Divison Information</title>
+  <title>Warranty Division Information</title>
 </head>
 
 <body>
   <main>
-  <h1>Add a new Warranty Divison's details</h1>
+  <h1>Add a new Warranty Division's details</h1>
   <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
-  <h4>Enter the details for the new Warranty Divison</h4>
+  <h4>Enter the details for the new Warranty Division</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addwarrantydivison}" th:object="${WarrantyDivison}">
+    <form action="#" method="post" th:action="@{/warrantyDivisionSubmitForm}" th:object="${Warrantydivison}">
       <div class="form-name">Brand</div> 
       <input style="font-family: Quicksand, sans-serif;" type="text" id="Brand" 
-                th:field="*{Brand}" placeholder="Brand of the Warranty Divison" required />
+                th:field="*{Brand}" placeholder="Brand of the Warranty Division" required />
       <br>
       <div class="form-name">Contact Information</div> 
       <input style="font-family: Quicksand, sans-serif;" type="text" id="EmailContact" 
-                th:field="*{EmailContact}" placeholder="Contact Information of the Warranty Divison" required />
+                th:field="*{EmailContact}" placeholder="Contact Information of the Warranty Division" required />
       <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
@@ -36,10 +36,5 @@
   </div>
   </main>
   <script type="text/javascript"></script>
-  <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" 
-    crossorigin="anonymous">
-  </script>
 </body>
 </html>
