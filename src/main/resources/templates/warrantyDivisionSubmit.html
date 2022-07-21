@@ -20,7 +20,7 @@
   <h1>Add a new Warranty Division's details</h1>
   <h4>Enter the details for the new Warranty Division</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/warrantyDivisionSubmitForm}" th:object="${Warrantydivison}">
+    <form action="#" method="post" th:action="@{/warrantyDivisionSubmitForm}" th:object="${WarrantyDivision}">
       <div class="form-name">Brand: <input style="font-family: Quicksand, sans-serif;" type="text" id="Brand" th:field="*{Brand}" placeholder="Brand of the Warranty Division" required /> </div> 
       <div class="form-name">Contact Information: <input style="font-family: Quicksand, sans-serif;" type="text" id="EmailContact" th:field="*{EmailContact}" placeholder="Contact Information of the Warranty Division" required /> </div> 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />

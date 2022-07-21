@@ -45,12 +45,12 @@
         <th class="header-name">Brand |</th>
         <th class="header-name" >EmailContact </th>
         
-        <tr th:each="n:${Warrantydivison}">
+        <tr th:each="n:${WarrantyDivisions}">
           <td th:text="${n.Brand}"></td>
           <td th:text="${n.EmailContact}"></td>
 
           <td>
-            <form th:action="@{}">
+            <form th:action="@{/warrantyEdit/{Brand}(Brand=${n.Brand})}">
               <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
             </form>
           </td>
