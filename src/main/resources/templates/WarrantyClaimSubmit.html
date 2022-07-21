@@ -18,19 +18,11 @@
 <body>
   <main>
   <h1>Add a new Warranty Claim's details</h1>
-  <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
   <h4>Enter the details for the new Warranty Claim</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addwarrantyclaim}" th:object="${WarrantyClaim}">
-      <div class="form-name">Id</div> 
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="WarrantyID" 
-                th:field="*{WarrantyID}" placeholder="Id of the Warranty" required />
-      <br>
-      <div class="form-name">Brand</div> 
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="Brand" 
-                th:field="*{Brand}" placeholder="Brand of the Warranty" required />
-      <br>
-
+    <form action="#" method="post" th:action="@{/warrantyClaimSubmitForm}" th:object="${WarrantyClaim}">
+      <div class="form-name">Id: <input style="font-family: Quicksand, sans-serif;" type="number" id="WarrantyID" th:field="*{WarrantyID}" placeholder="Id of the Warranty" required /></div> 
+      <div class="form-name">Brand: <input style="font-family: Quicksand, sans-serif;" type="text" id="Brand" th:field="*{Brand}" placeholder="Brand of the Warranty" required /></div> 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
