@@ -22,12 +22,12 @@ public class Usagereport {
         this.RepairID = RepairID;
     }
 
-    public String getMessage() {
-        return this.Message;
+    public void setMessage(String Message) {
+        this.Message = Message;
     }
 
-    public void setClaimID(String Message) {
-        this.Message = Message;
+    public String getMessage() {
+        return this.Message;
     }
 
 }

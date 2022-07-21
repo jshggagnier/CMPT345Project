@@ -18,22 +18,12 @@
 <body>
   <main>
   <h1>Add a new Usage Report's details</h1>
-  <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
   <h4>Enter the details for the new Usage Report</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addmakesuseof}" th:object="${MakesUseOf}">
-      <div class="form-name">Tool Id</div> 
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="ToolID" 
-                th:field="*{ToolID}" placeholder="Id of the Tool" required />
-      <br>
-      <div class="form-name">Work Report Id</div> 
-      <input style="font-family: Quicksand, sans-serif;" type="number" id="RepairID" 
-                th:field="*{RepairID}" placeholder="Id of the Work Report" required />
-      <br>
-      <div class="form-name">Message</div> 
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="UsageReport" 
-                th:field="*{UsageReport}" placeholder="Message of the Usage Report" required />
-      <br>
+    <form action="#" method="post" th:action="@{/usageReportSubmitForm}" th:object="${UsageReport}">
+      <div class="form-name">Tool ID: <input style="font-family: Quicksand, sans-serif;" type="number" id="ToolID" th:field="*{ToolID}" placeholder="Id of the Tool" required /></div> 
+      <div class="form-name">Work Report ID: <input style="font-family: Quicksand, sans-serif;" type="number" id="RepairID" th:field="*{RepairID}" placeholder="Id of the Work Report" required /></div> 
+      <div class="form-name">Message: <input style="font-family: Quicksand, sans-serif;" type="text" id="UsageReport" th:field="*{Message}" placeholder="Message of the Usage Report" required /></div> 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
