@@ -79,7 +79,7 @@ public class WorkorderController {
   String viewWorkOrders(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID integer, StartDate varchar(10), EndDate varchar(10), Description varchar(300))");
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID varchar(30), StartDate varchar(14), EndDate varchar(14), Description varchar(300))");
       ResultSet rs = stmt.executeQuery(("SELECT * FROM Workorders"));
       ArrayList<Workorder> dataList = new ArrayList<Workorder>();
       while (rs.next()) {
@@ -105,9 +105,7 @@ public class WorkorderController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
-      //by now we have verified the customer exists
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID integer, StartDate varchar(10), EndDate varchar(10), Description varchar(300))");
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID varchar(30), StartDate varchar(14), EndDate varchar(14), Description varchar(300))");
       String sql = "INSERT INTO Workorders (CustomerNum,ClaimID,StartDate,Description) VALUES ("+workorder.getCustomerNum()+", '"+workorder.getClaimID()+"', '"+workorder.getStartDate()+"', '"+workorder.getDescription()+"')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
@@ -133,8 +131,36 @@ public class WorkorderController {
         obj.setDescription(rs.getString("Description"));
         obj.setCustomerNum(rs.getInt("CustomerNum"));
       }
+      ResultSet rs2 = stmt.executeQuery(("SELECT * FROM customers WHERE CustIdentifier = " + obj.getCustomerNum()));
+      Customer customer = new Customer();
+      while (rs2.next()) {
+        
+        customer.setCustIdentifier(rs2.getInt("CustIdentifier"));
+        customer.setName(rs2.getString("Name"));
+        customer.setEmail(rs2.getString("Email"));
+        customer.setPhoneNumber(rs2.getString("PhoneNumber"));
+        customer.setAddress(rs2.getString("Address"));
+      }
+      model.put("Customer", customer);
       model.put("WorkOrder", obj);
-      return "WorkOrderEdit";
+      return "workOrderEdit";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+  }
+
+  @PostMapping(path = "/workOrderEditForm", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+  public String handleWorkorderEdit(Map<String, Object> model,Workorder workorder) throws Exception {
+    // Establishing connection with database
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID varchar(30), StartDate varchar(14), EndDate varchar(14), Description varchar(300))");
+      String sql = "UPDATE Workorders SET ClaimID='"+workorder.getClaimID()+"', StartDate='"+workorder.getStartDate()+"', Description='"+workorder.getDescription()+"' WHERE OrderNum='"+workorder.getOrderNum()+"';";
+      System.out.println(sql);
+      stmt.executeUpdate(sql);
+
+      return "redirect:/workOrderView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";

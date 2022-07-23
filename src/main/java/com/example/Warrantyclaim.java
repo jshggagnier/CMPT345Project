@@ -2,14 +2,14 @@ package com.example;
 
 public class Warrantyclaim {
     
-    private int WarrantyID;
+    private String WarrantyID;
     private String Brand;
 
-    public int getWarrantyID() {
+    public String getWarrantyID() {
         return this.WarrantyID;
     }
 
-    public void setWarrantyID(int WarrantyID) {
+    public void setWarrantyID(String WarrantyID) {
         this.WarrantyID = WarrantyID;
     }
 

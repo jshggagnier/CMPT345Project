@@ -7,15 +7,6 @@ public class Workorder
     private String StartDate;
     private String EndDate;
     private String Description;
-    private String CustomerName; // this will be removed shortly, once customers are added properly
-
-    public String getCustomerName() {
-        return this.CustomerName;
-    }
-
-    public void setCustomerName(String CustomerName) {
-        this.CustomerName = CustomerName;
-    }
 
     public String getClaimID() {
         return this.ClaimID;

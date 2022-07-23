@@ -59,12 +59,12 @@ public class WarrantyclaimController {
   String WarrantyDivisionView(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID integer, Brand varchar(30))");
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID varchar(30), Brand varchar(30))");
       ResultSet rs = stmt.executeQuery(("SELECT * FROM WarrantyClaim"));
       ArrayList<Warrantyclaim> dataList = new ArrayList<Warrantyclaim>();
       while (rs.next()) {
         Warrantyclaim obj = new Warrantyclaim();
-        obj.setWarrantyID(rs.getInt("WarrantyID"));
+        obj.setWarrantyID(rs.getString("WarrantyID"));
         obj.setBrand(rs.getString("Brand"));
         dataList.add(obj);
       }
@@ -81,7 +81,7 @@ public class WarrantyclaimController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID integer, Brand varchar(30))");
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID varchar(30), Brand varchar(30))");
       String sql = "INSERT INTO WarrantyClaim (WarrantyID, Brand) VALUES ('"+WarrantyClaim.getWarrantyID()+"', '"+WarrantyClaim.getBrand()+"')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
