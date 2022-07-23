@@ -16,15 +16,10 @@
 
 package com.example;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
@@ -32,7 +27,6 @@ import org.springframework.http.MediaType;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
@@ -59,7 +53,6 @@ public class UsagereportController {
     String usageReportView(Map<String, Object> model) {
       try (Connection connection = dataSource.getConnection()) {
         Statement stmt = connection.createStatement();
-        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS MakesUseOf (UsageReport varchar(30), RepairID integer, ToolID integer)");
         ResultSet rs = stmt.executeQuery(("SELECT * FROM MakesUseOf"));
         ArrayList<Usagereport> dataList = new ArrayList<Usagereport>();
         while (rs.next()) {
@@ -82,7 +75,6 @@ public class UsagereportController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS MakesUseOf (UsageReport varchar(30), RepairID integer, ToolID integer)");
       String sql = "INSERT INTO MakesUseOf (UsageReport, RepairID, ToolID) VALUES ('"+UsageReport.getMessage()+"', '"+UsageReport.getRepairID()+"', '"+UsageReport.getToolID()+"')";
       System.out.println(sql);
       stmt.executeUpdate(sql);

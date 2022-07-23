@@ -16,15 +16,10 @@
 
 package com.example;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
@@ -32,7 +27,6 @@ import org.springframework.http.MediaType;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
@@ -59,7 +53,6 @@ public class CustomerController {
   String viewcustomers(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
       ResultSet rs = stmt.executeQuery(("SELECT * FROM customers"));
       ArrayList<Customer> dataList = new ArrayList<Customer>();
       while (rs.next()) {
@@ -72,6 +65,7 @@ public class CustomerController {
         dataList.add(obj);
       }
       model.put("Customers", dataList);
+      connection.close();
       return "customerView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
@@ -88,7 +82,7 @@ public class CustomerController {
       String sql = "INSERT INTO customers (Name, Email, PhoneNumber, Address) VALUES ('"+Customer.getName()+"', '"+Customer.getEmail()+"', '"+Customer.getPhoneNumber()+"', '"+Customer.getAddress()+"')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
-
+      connection.close();
       return "redirect:/customerView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
@@ -110,6 +104,7 @@ public class CustomerController {
         obj.setAddress(rs.getString("Address"));
       }
       model.put("Customer", obj);
+      connection.close();
       return "customerEdit";
     } catch (Exception e) {
       model.put("message", e.getMessage());

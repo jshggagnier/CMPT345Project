@@ -21,26 +21,22 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.MediaType;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Map;
+
 
 
 @Controller
 @SpringBootApplication
-public class Main {
+public class Main implements CommandLineRunner {
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -50,6 +46,22 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
+  }
+
+  public void run(String... args) throws Exception {
+    //initialize all databases!
+    try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID varchar(30), StartDate varchar(14), EndDate varchar(14), Description varchar(300))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID varchar(30), Brand varchar(30))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Vendors (VendorName varchar(30), EmailContact varchar(30), BillingShippingAddress varchar(30))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS MakesUseOf (UsageReport varchar(30), RepairID integer, ToolID integer)");
+    System.out.println("Boot Successful: Pogrymby");
+  }
+  catch (Exception e) {
+    System.out.println(e);
+  }
   }
 
   @RequestMapping("/")
@@ -67,5 +79,4 @@ public class Main {
       return new HikariDataSource(config);
     }
   }
-
 }
