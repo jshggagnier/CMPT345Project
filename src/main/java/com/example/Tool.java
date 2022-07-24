@@ -2,15 +2,15 @@ package com.example;
 
 public class Tool {
 
-    private int ToolID;
+    private int ToolId;
     private String ToolName;
 
-    public void setToolID(int ToolID) {
-        this.ToolID = ToolID;
+    public void setToolId(int ToolId) {
+        this.ToolId = ToolId;
     }
 
-    public int getToolID() {
-        return this.ToolID;
+    public int getToolId() {
+        return this.ToolId;
     }
 
     public String getToolName() {

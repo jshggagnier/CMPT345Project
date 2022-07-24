@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}"></html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+    crossorigin="anonymous"
+  >
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+  <title>Submit Tool</title>
+</head>
+
+
+<body>
+  <main>
+  <h1>Add a new Tool's details</h1>
+  <h4>Enter the details for the new Tool</h4>
+  <div class="form-data">
+    <form action="#" method="post" th:action="@{/toolEditForm}" th:object="${Tool}">
+      <div class="form-name" hidden>Tool Id: <input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNum" th:field="*{OrderNum}" th:value="${WorkOrder.OrderNum}" required /></div>
+      <div class="form-name">Tool Name: <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" th:field="*{StartDate}" th:value="${WorkOrder.StartDate}" placeholder="Date Submitted the Work Order" required /></div>
+      <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
+      <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
+    </form>
+  </div>
+  <h2>Work Reports:</h2>
+  <table id="WorkOrderViewTable"class="styled-table">
+  <tr>
+    <th>Date</th>
+    <th>|Staff ID</th>
+    <th>|Message</th>
+    <th>|Does this end the workorder?</th>
+  </tr>
+  <tr th:each="n:${WorkReports}">
+    <td th:text="${n.Date}"></td>
+    <td th:text="${n.StaffID}"></td>
+    <td th:text="${n.Message}"></td>
+    <td th:text="${n.CloseWorkorder}"></td>
+  </tr>
+  </table>
+  <a class="dropdown-item" th:href="@{/workReportSubmit/{OrderNum}(OrderNum=${WorkOrder.OrderNum})}">Submit a Work Report</a>
+  </main>
+  <script type="text/javascript"></script>
+</body>
