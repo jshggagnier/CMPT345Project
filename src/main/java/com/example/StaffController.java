@@ -53,15 +53,22 @@ public class StaffController {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       ResultSet rs1 = stmt.executeQuery(("SELECT * FROM StaffDetails"));
-      ResultSet rs2 = stmt.executeQuery(("SELECT * FROM StaffRoles"));
       ArrayList<Staff> dataList = new ArrayList<Staff>();
-      while (rs1.next() || rs2.next()) {
+      while (rs1.next()) {
+        
         Staff obj = new Staff();
         obj.setName(rs1.getString("Name"));
         obj.setPhoneNumber(rs1.getString("PhoneNumber"));
         obj.setStaffId(rs1.getInt("StaffId"));
-        obj.setRole(rs2.getString("Role"));
+        
         dataList.add(obj);
+      }
+      ResultSet rs2 = stmt.executeQuery(("SELECT * FROM StaffRoles"));
+      int x = 0;
+      while(rs2.next())
+      {
+        dataList.get(x).setRole(rs2.getString("Role"));
+        x++;
       }
       model.put("Staff", dataList);
       return "staffView";
