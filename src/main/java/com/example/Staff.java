@@ -1,17 +1,17 @@
 package com.example;
 
 public class Staff {
-    private int Id;
+    private int StaffId;
     private String Name;
-    private int PhoneNumber;
+    private String PhoneNumber;
     private String Role;
 
-    public int getId() {
-        return this.Id;
+    public int getStaffId() {
+        return this.StaffId;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setStaffId(int StaffId) {
+        this.StaffId = StaffId;
     }
 
     public String getName() {
@@ -22,11 +22,11 @@ public class Staff {
         this.Name = Name;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return this.PhoneNumber;
     }
 
-    public void setPhoneNumber(int PhoneNumber) {
+    public void setPhoneNumber(String PhoneNumber) {
         this.PhoneNumber = PhoneNumber;
     }
 

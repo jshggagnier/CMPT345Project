@@ -58,6 +58,8 @@ public class Main implements CommandLineRunner {
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Vendors (VendorName varchar(30), EmailContact varchar(30), BillingShippingAddress varchar(30))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS MakesUseOf (UsageReport varchar(30), RepairID integer, ToolID integer)");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffDetails (StaffId serial, Name varchar(30), PhoneNumber varchar(30))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffRoles (StaffId serial, Role varchar(30))");
     System.out.println("Boot Successful: Pogrymby");
   }
   catch (Exception e) {
