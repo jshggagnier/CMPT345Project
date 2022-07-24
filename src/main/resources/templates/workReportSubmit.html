@@ -25,7 +25,7 @@
       <div class="form-name">Date: <input style="font-family: Quicksand, sans-serif;" type="date" th:field="*{Date}" required /></div>
       <div class="form-name">Choose Staff Member: 
       <select th:field="*{StaffID}">
-        <option th:each="staff : ${Staff}" th:value="${staff.StaffID}" th:text="${staff.StaffName}"></option>
+        <option th:each="staff : ${Staff}" th:value="${staff.StaffId}" th:text="${staff.Name}" required></option>
       </select>
       <a th:href="@{/staffSubmit}">Add New Staff Member</a>
       </div>

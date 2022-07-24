@@ -50,18 +50,18 @@ public class WorkReportController {
 
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery(("SELECT * FROM customers")); // this will be changed to staff later
-      ArrayList<Customer> dataList = new ArrayList<Customer>();
-      while (rs.next()) {
-        Customer obj = new Customer();
-        obj.setCustIdentifier(rs.getInt("CustIdentifier"));
-        obj.setName(rs.getString("Name"));
-        obj.setEmail(rs.getString("Email"));
-        obj.setPhoneNumber(rs.getString("PhoneNumber"));
-        obj.setAddress(rs.getString("Address"));
+      ResultSet rs1 = stmt.executeQuery(("SELECT * FROM StaffDetails"));
+      ArrayList<Staff> dataList = new ArrayList<Staff>();
+      while (rs1.next()) {
+        
+        Staff obj = new Staff();
+        obj.setName(rs1.getString("Name"));
+        obj.setPhoneNumber(rs1.getString("PhoneNumber"));
+        obj.setStaffId(rs1.getInt("StaffId"));
+        
         dataList.add(obj);
       }
-      model.put("Customers", dataList);
+      model.put("Staff", dataList);
       return "workReportSubmit";
     } catch (Exception e) {
       model.put("message", e.getMessage());
@@ -101,7 +101,7 @@ public class WorkReportController {
       System.out.println(sql);
       stmt.executeUpdate(sql);
 
-      return "redirect:/workOrderView";
+      return "redirect:/WorkOrderEdit/"+workReport.getOrderNum()+"?";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";
