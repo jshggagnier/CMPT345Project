@@ -33,6 +33,12 @@
   </div>
   <h2>Work Reports:</h2>
   <table id="WorkOrderViewTable"class="styled-table">
+  <tr>
+    <th>Date</th>
+    <th>|Staff ID</th>
+    <th>|Message</th>
+    <th>|Does this end the workorder?</th>
+  </tr>
   <tr th:each="n:${WorkReports}">
     <td th:text="${n.Date}"></td>
     <td th:text="${n.StaffID}"></td>

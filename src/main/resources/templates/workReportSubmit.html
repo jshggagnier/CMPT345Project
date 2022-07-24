@@ -31,7 +31,7 @@
       </div>
       <div hidden><input type="text" th:field="*{OrderNum}" th:value="${WorkReport.OrderNum}"/></div>
       <div class="form-name">Description/Message: <input style="font-family: Quicksand, sans-serif;" type="text" th:field="*{Message}" placeholder="Short Description of Repair Method Used" required /></div>
-      <div class="form-name">Does this End the Workorder?: <input style="font-family: Quicksand, sans-serif;" type="checkbox" th:field="*{CloseWorkorder}" placeholder="Warranty Claim ID" required /></div>
+      <div class="form-name">Does this End the Workorder?: <input style="font-family: Quicksand, sans-serif;" type="checkbox" th:field="*{CloseWorkorder}" placeholder="Warranty Claim ID" /></div>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
