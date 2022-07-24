@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}"></html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+    crossorigin="anonymous"
+  >
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/SubmitworkReport.css">
+  <title>Submit Work Order</title>
+</head>
+
+
+<body>
+  <main>
+  <h1>Add a new Work Order's details</h1>
+  <h4>Enter the details for the new Work Order</h4>
+  <div class="form-data">
+    <form action="#" method="post" th:action="@{/workReportSubmitForm}" th:object="${WorkReport}">
+      <div class="form-name">Date: <input style="font-family: Quicksand, sans-serif;" type="date" th:field="*{Date}" required /></div>
+      <div class="form-name">Choose Staff Member: 
+      <select th:field="*{StaffID}">
+        <option th:each="staff : ${Staff}" th:value="${staff.StaffID}" th:text="${staff.StaffName}"></option>
+      </select>
+      <a th:href="@{/staffSubmit}">Add New Staff Member</a>
+      </div>
+      <div hidden><input type="text" th:field="*{OrderNum}" th:value="${WorkReport.OrderNum}"/></div>
+      <div class="form-name">Description/Message: <input style="font-family: Quicksand, sans-serif;" type="text" th:field="*{Message}" placeholder="Short Description of Repair Method Used" required /></div>
+      <div class="form-name">Does this End the Workorder?: <input style="font-family: Quicksand, sans-serif;" type="checkbox" th:field="*{CloseWorkorder}" placeholder="Warranty Claim ID" required /></div>
+      <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
+      <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
+    </form>
+  </div>
+  </main>
+  <script type="text/javascript"></script>
+</body>
+</html>

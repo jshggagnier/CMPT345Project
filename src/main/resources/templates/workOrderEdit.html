@@ -23,14 +23,24 @@
   <div class="form-data">
     <form action="#" method="post" th:action="@{/workOrderEditForm}" th:object="${WorkOrder}">
       <div class="form-name" hidden>Order Num<input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNum" th:field="*{OrderNum}" th:value="${WorkOrder.OrderNum}" required /></div>
-      <div class="form-name">Start Date: <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" th:field="*{StartDate}" th:value="${WorkOrder.StartDate}" placeholder="Date Submitted the Work Order" required /></div>
-      <div class="form-name">CustName: <body th:text="${Customer.Name}"></body></div>      
-      <div class="form-name">Description of Fault: <input style="font-family: Quicksand, sans-serif;" type="text" id="CustName" th:field="*{Description}" th:value="${WorkOrder.Description}" placeholder="Short Description of Fault" required /></div>
-      <div class="form-name">ClaimID: <input style="font-family: Quicksand, sans-serif;" type="text" id="ClaimID" th:field="*{ClaimID}" th:value="${WorkOrder.ClaimID}" placeholder="Warranty Claim ID" required /></div>
+      <div class="form-name">Date: <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" th:field="*{StartDate}" th:value="${WorkOrder.StartDate}" placeholder="Date Submitted the Work Order" required /></div>
+      <div class="form-name">StaffID: <body th:text="${Customer.Name}"></body></div>      
+      <div class="form-name">Message: <input style="font-family: Quicksand, sans-serif;" type="text" id="CustName" th:field="*{Description}" th:value="${WorkOrder.Description}" placeholder="Short Description of Fault" required /></div>
+      <div class="form-name">Whether or not this closed the workorder: <input style="font-family: Quicksand, sans-serif;" type="text" id="ClaimID" th:field="*{ClaimID}" th:value="${WorkOrder.ClaimID}" placeholder="Warranty Claim ID" required /></div>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
   </div>
+  <h2>Work Reports:</h2>
+  <table id="WorkOrderViewTable"class="styled-table">
+  <tr th:each="n:${WorkReports}">
+    <td th:text="${n.Date}"></td>
+    <td th:text="${n.StaffID}"></td>
+    <td th:text="${n.Message}"></td>
+    <td th:text="${n.CloseWorkorder}"></td>
+  </tr>
+  </table>
+  <a class="dropdown-item" th:href="@{/workReportSubmit/{OrderNum}(OrderNum=${WorkOrder.OrderNum})}">Submit a Work Report</a>
   </main>
   <script type="text/javascript"></script>
 </body>

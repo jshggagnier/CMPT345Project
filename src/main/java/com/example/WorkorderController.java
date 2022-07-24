@@ -113,16 +113,16 @@ public class WorkorderController {
       try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       ResultSet rs = stmt.executeQuery(("SELECT * FROM Workorders WHERE OrderNum = " + nid)); // this should only ever run once, since OrderNum is serial
-      Workorder obj = new Workorder();
+      Workorder workorder = new Workorder();
       while (rs.next()) {
-        obj.setOrderNum(rs.getInt("OrderNum"));
-        obj.setStartDate(rs.getString("startdate"));
-        obj.setEndDate(rs.getString("enddate"));
-        obj.setClaimID(rs.getString("ClaimID"));
-        obj.setDescription(rs.getString("Description"));
-        obj.setCustomerNum(rs.getInt("CustomerNum"));
+        workorder.setOrderNum(rs.getInt("OrderNum"));
+        workorder.setStartDate(rs.getString("startdate"));
+        workorder.setEndDate(rs.getString("enddate"));
+        workorder.setClaimID(rs.getString("ClaimID"));
+        workorder.setDescription(rs.getString("Description"));
+        workorder.setCustomerNum(rs.getInt("CustomerNum"));
       }
-      ResultSet rs2 = stmt.executeQuery(("SELECT * FROM customers WHERE CustIdentifier = " + obj.getCustomerNum()));
+      ResultSet rs2 = stmt.executeQuery(("SELECT * FROM customers WHERE CustIdentifier = " + workorder.getCustomerNum()));
       Customer customer = new Customer();
       while (rs2.next()) {
         
@@ -132,8 +132,20 @@ public class WorkorderController {
         customer.setPhoneNumber(rs2.getString("PhoneNumber"));
         customer.setAddress(rs2.getString("Address"));
       }
+      ResultSet rs3 = stmt.executeQuery(("SELECT * FROM WorkReports WHERE OrderNum = " + workorder.getOrderNum()));
+      ArrayList<WorkReport> dataList = new ArrayList<WorkReport>();
+      while (rs3.next()) {
+        WorkReport obj = new WorkReport();
+        obj.setOrderNum(rs3.getInt("OrderNum"));
+        obj.setStaffID(rs3.getInt("StaffID"));
+        obj.setDate(rs3.getString("Date"));
+        obj.setMessage(rs3.getString("Message"));
+        obj.setCloseWorkorder(rs3.getBoolean("CloseWorkorder"));
+        dataList.add(obj);
+      }
+      model.put("WorkReports",dataList);
       model.put("Customer", customer);
-      model.put("WorkOrder", obj);
+      model.put("WorkOrder", workorder);
       return "workOrderEdit";
     } catch (Exception e) {
       model.put("message", e.getMessage());

@@ -1,13 +1,12 @@
 package com.example;
 
-public class Technicianworkreport {
-    
+public class WorkReport {
+    private int OrderNum;
     private int StaffID;
-    private int OrderNumber;
     private String Message;
     private String Date;
-    private int CustID;
-
+    private boolean CloseWorkorder;
+    
     public int getStaffID() {
         return this.StaffID;
     }
@@ -16,12 +15,12 @@ public class Technicianworkreport {
         this.StaffID = StaffID;
     }
 
-    public int getOrderNumber() {
-        return this.OrderNumber;
+    public int getOrderNum() {
+        return this.OrderNum;
     }
 
-    public void setOrderNumber(int OrderNumber) {
-        this.OrderNumber = OrderNumber;
+    public void setOrderNum(int OrderNum) {
+        this.OrderNum = OrderNum;
     }
 
     public String getMessage() {
@@ -40,11 +39,16 @@ public class Technicianworkreport {
         this.Date = Date;
     }
 
-    public int getCustID() {
-        return this.CustID;
+    public boolean getCloseWorkorder() {
+        return this.CloseWorkorder;
     }
 
-    public void setCustID(int CustID) {
-        this.CustID = CustID;
+    public void setCloseWorkorder(boolean CloseWorkorder) {
+        this.CloseWorkorder = CloseWorkorder;
     }
+
+    public boolean isCloseWorkorder() {
+        return this.CloseWorkorder;
+    }
+
 }
