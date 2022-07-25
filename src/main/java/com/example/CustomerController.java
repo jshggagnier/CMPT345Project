@@ -64,6 +64,13 @@ public class CustomerController {
         obj.setAddress(rs.getString("Address"));
         dataList.add(obj);
       }
+      ResultSet rs2 = stmt.executeQuery(("SELECT * FROM AddressBook"));
+      int x = 0;
+      while(rs2.next())
+      {
+        dataList.get(x).setPostalCode(rs2.getString("PostalCode"));
+        x++;
+      }
       model.put("Customers", dataList);
       connection.close();
       return "customerView";
@@ -78,10 +85,12 @@ public class CustomerController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
-      String sql = "INSERT INTO customers (Name, Email, PhoneNumber, Address) VALUES ('"+Customer.getName()+"', '"+Customer.getEmail()+"', '"+Customer.getPhoneNumber()+"', '"+Customer.getAddress()+"')";
-      System.out.println(sql);
-      stmt.executeUpdate(sql);
+      String sql1 = "INSERT INTO customers (Name, Email, PhoneNumber, Address) VALUES ('"+Customer.getName()+"', '"+Customer.getEmail()+"', '"+Customer.getPhoneNumber()+"', '"+Customer.getAddress()+"')";
+      String sql2 = "INSERT INTO AddressBook (Address, PostalCode) VALUES ('"+Customer.getAddress()+"', '"+Customer.getPostalCode()+"')";
+      System.out.println(sql1);
+      stmt.executeUpdate(sql1);
+      System.out.println(sql2);
+      stmt.executeUpdate(sql2);
       connection.close();
       return "redirect:/customerView";
     } catch (Exception e) {

@@ -55,8 +55,10 @@ public class Main implements CommandLineRunner {
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID varchar(30), StartDate varchar(14), EndDate varchar(14), Description varchar(300))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WorkReports (OrderNum integer, StaffID integer, Message varchar(50), Date varchar(14), CloseWorkOrder varchar(10))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID varchar(30), Brand varchar(30))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyDivisions (Brand varchar(30), EmailContact varchar(30))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Vendors (VendorName varchar(30), EmailContact varchar(30), BillingShippingAddress varchar(30))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS AddressBook (Address varchar(50), PostalCode varchar(9))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS MakesUseOf (UsageReport varchar(30), RepairID integer, ToolID integer)");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffDetails (StaffId serial, Name varchar(30), PhoneNumber varchar(30))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffRoles (StaffId serial, Role varchar(30))");

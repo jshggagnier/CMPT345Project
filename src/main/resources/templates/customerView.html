@@ -47,6 +47,7 @@
         <th class="header-name">|Email</th>
         <th class="header-name">|Phone Number</th>
         <th class="header-name">|Address</th>
+        <th class="header-name">|Postal Code</th>
         
         <tr th:each="n:${Customers}">
           <td th:text="${n.CustIdentifier}"></td>
@@ -54,6 +55,7 @@
           <td th:text="${n.Email}"></td>
           <td th:text="${n.PhoneNumber}"></td>
           <td th:text="${n.Address}"></td>
+          <td th:text="${n.PostalCode}"></td>
           <td>
             <form th:action="@{/WorkOrderEdit/{CustIdentifier}(CustIdentifier=${n.CustIdentifier})}">
               <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>

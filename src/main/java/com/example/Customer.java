@@ -6,6 +6,7 @@ public class Customer {
     private String Email;
     private String PhoneNumber;
     private String Address;
+    private String PostalCode;
 
     public int getCustIdentifier() {
         return this.CustIdentifier;
@@ -45,6 +46,14 @@ public class Customer {
 
     public void setAddress(String Address) {
         this.Address = Address;
+    }
+
+    public String getPostalCode() {
+        return this.PostalCode;
+    }
+
+    public void setPostalCode(String PostalCode) {
+        this.PostalCode = PostalCode;
     }
 
 }
