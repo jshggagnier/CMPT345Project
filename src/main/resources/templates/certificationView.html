@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/NavBar :: NavBar}"></html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+    crossorigin="anonymous"
+  >
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+
+  <!--Font & Icon import-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Google font Quicksand-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  
+  <style>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    html {
+      scrollbar-width: none;
+    }
+  </style>
+
+  <title>View Certifications</title>
+</head>
+
+<body style="font-family: Quicksand, sans-serif;">
+  <div class="db-container">
+    <h1 style="font-weight: bolder;">Certifications</h1><br>
+
+    <table id="WorkOrderViewTable"class="styled-table">
+      <tr class="table-header" style="color: rgb(0, 0, 0);">
+        <th class="header-name"> Certification Number | </th>
+        <th class="header-name" > Certification Name | </th>
+        <th class="header-name" > Date Obtained | </th>
+        <th class="header-name" > Expiry Date | </th>
+        <th class="header-name" > Technician ID </th>
+        
+        <tr th:each="n:${Certifications}">
+          <td th:text="${n.CertificationNumber}"></td>
+          <td th:text="${n.CertificationName}"></td>
+          <td th:text="${n.DateObtained}"></td>
+          <td th:text="${n.ExpiryDate}"></td>
+          <td th:text="${n.TechnicianId}"></td>
+
+          <td>
+            <!-- <form th:action="@{/ToolEdit/{ToolId}(ToolId=${n.ToolId})}"> -->
+              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
+            </form>
+          </td>
+        </tr>
+        
+    </table>
+  </div>
+  <script type="text/javascript"></script>
+</body>
+</html>

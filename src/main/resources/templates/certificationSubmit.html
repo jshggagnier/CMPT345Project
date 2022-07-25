@@ -18,13 +18,12 @@
 <body>
   <main>
   <h1>Add a new Certifications's details</h1>
-  <a href="/src/main/resources/templates/menu.html" class="btn btn-danger">Menu</a>
   <h4>Enter the details for the new Certifications</h4>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/addcertifications}" th:object="${Certification}">
-      <div class="form-name">Id</div> 
+    <form action="#" method="post" th:action="@{/certificationSubmitForm}" th:object="${Certification}">
+      <div class="form-name">Certification Number</div> 
       <input style="font-family: Quicksand, sans-serif;" type="number" id="CustIdentifier" 
-                th:field="*{CustIdentifier}" placeholder="Id of the Customer" required />
+                th:field="*{CertificationNumber}" placeholder="Id of the Certification" required />
       <br>
       <div class="form-name">Name</div> 
       <input style="font-family: Quicksand, sans-serif;" type="text" id="CertificationName" 
@@ -40,7 +39,7 @@
       <br>
       <div class="form-name">Technician Id</div>
       <input style="font-family: Quicksand, sans-serif;" type="text" id="TechnicianID" 
-                th:field="*{TechnicianID}" placeholder="Technician Id on the Certification" required />
+                th:field="*{TechnicianId}" placeholder="Technician Id on the Certification" required />
       <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">

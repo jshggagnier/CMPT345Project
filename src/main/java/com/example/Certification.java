@@ -1,50 +1,50 @@
 package com.example;
 
 public class Certification {
-    private int CustIdentifier;
-    private String Name;
-    private String Email;
-    private int PhoneNumber;
-    private String Address;
+    private int CertificationNumber;
+    private String CertificationName;
+    private String DateObtained;
+    private String ExpiryDate;
+    private int TechnicianId;
 
-    public int getCustIdentifier() {
-        return this.CustIdentifier;
+    public int getCertificationNumber() {
+        return this.CertificationNumber;
     }
 
-    public void setCustIdentifier(int CustIdentifier) {
-        this.CustIdentifier = CustIdentifier;
+    public void setCertificationNumber(int CertificationNumber) {
+        this.CertificationNumber = CertificationNumber;
     }
 
-    public String getName() {
-        return this.Name;
+    public String getCertificationName() {
+        return this.CertificationName;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setCertificationName(String CertificationName) {
+        this.CertificationName = CertificationName;
     }
 
-    public String getEmail() {
-        return this.Email;
+    public String getDateObtained() {
+        return this.DateObtained;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setDateObtained(String DateObtained) {
+        this.DateObtained = DateObtained;
     }
 
-    public int getPhoneNumber() {
-        return this.PhoneNumber;
+    public String getExpiryDate() {
+        return this.ExpiryDate;
     }
 
-    public void setPhoneNumber(int PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
+    public void setExpiryDate(String ExpiryDate) {
+        this.ExpiryDate = ExpiryDate;
     }
 
-    public String getAddress() {
-        return this.Address;
+    public int getTechnicianId() {
+        return this.TechnicianId;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setTechnicianId(int TechnicianId) {
+        this.TechnicianId = TechnicianId;
     }
 
 }
