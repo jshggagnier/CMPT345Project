@@ -11,23 +11,25 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
     crossorigin="anonymous"
   >
-  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/vendorSubmit.css">
   <title>Vendor Information</title>
 </head>
 
 <body>
   <main>
   <h1>Add a new Vendor's details</h1>
+  <p1>
   <h4>Enter the details for the new Vendor</h4>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/vendorSubmitForm}" th:object="${Vendor}">
-      <div class="form-name">Name: <input style="font-family: Quicksand, sans-serif;" type="text" id="VendorName" th:field="*{VendorName}" placeholder="Name of the Vendor" required /></div> 
-      <div class="form-name">Contact Information: <input style="font-family: Quicksand, sans-serif;" type="text" id="EmailContact" th:field="*{EmailContact}" placeholder="Contact Information of the Vendor" required /></div> 
-      <div class="form-name">Billing and Shipping Address: <input style="font-family: Quicksand, sans-serif;" type="text" id="BillingShippingAddress" th:field="*{BillingShippingAddress}" placeholder="Billing and Shipping Address of the Part" required /></div> 
+	    <div class="form-name">Name: <br><input style="font-family: Quicksand, sans-serif;" type="text" id="VendorName" th:field="*{VendorName}" placeholder="Name of the Vendor" required /></div> 
+	    <div class="form-name">Contact Information: <br><input style="font-family: Quicksand, sans-serif;" type="text" id="EmailContact" th:field="*{EmailContact}" placeholder="Contact Information of the Vendor" required /></div> 
+	    <div class="form-name">Billing and Shipping Address: <br><input style="font-family: Quicksand, sans-serif;" type="text" id="BillingShippingAddress" th:field="*{BillingShippingAddress}" placeholder="Billing and Shipping Address of the Part" required /></div> 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
   </div>
+  </p1>
   </main>
   <script type="text/javascript"></script>
 </body>

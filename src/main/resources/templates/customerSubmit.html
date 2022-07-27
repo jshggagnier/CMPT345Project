@@ -11,26 +11,28 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
     crossorigin="anonymous"
   >
-  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/customerSubmit.css">
   <title>Customer Information</title>
 </head>
 
 <body>
   <main>
   <h1>Add a new Customer's details</h1>
+  <p1>
   <h2>Data of an Customer will be taken from this page and submitted into both Customers and AddressBook tables</h2>
   <h4>Enter the details for the new Customer</h4>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/customerSubmitForm}" th:object="${Customer}">
-      <div class="form-name">Name :<input style="font-family: Quicksand, sans-serif;" type="text" id="Name" th:field="*{Name}" placeholder="Name of the Customer" required /></div> 
-      <div class="form-name">Email :<input style="font-family: Quicksand, sans-serif;" type="text" id="Email" th:field="*{Email}" placeholder="Email of the Customer" required /></div> 
-      <div class="form-name">Phone Number :<input style="font-family: Quicksand, sans-serif;" type="number" id="PhoneNumber" th:field="*{PhoneNumber}" placeholder="Phone number of the Customer" required /></div> 
-      <div class="form-name">Address :<input style="font-family: Quicksand, sans-serif;" type="text" id="Address" th:field="*{Address}" placeholder="Address of the Customer" required /></div> 
-      <div class="form-name">Postal Code :<input style="font-family: Quicksand, sans-serif;" type="text" id="Address" th:field="*{PostalCode}" placeholder="Address of the Customer" required /></div> 
+	    <div class="form-name">Name :<br><input style="font-family: Quicksand, sans-serif;" type="text" id="Name" th:field="*{Name}" placeholder="Name of the Customer" required /></div> 
+	    <div class="form-name">Email :<br><input style="font-family: Quicksand, sans-serif;" type="text" id="Email" th:field="*{Email}" placeholder="Email of the Customer" required /></div> 
+	    <div class="form-name">Phone Number :<br><input style="font-family: Quicksand, sans-serif;" type="number" id="PhoneNumber" th:field="*{PhoneNumber}" placeholder="Phone number of the Customer" required /></div> 
+	    <div class="form-name">Address :<br><input style="font-family: Quicksand, sans-serif;" type="text" id="Address" th:field="*{Address}" placeholder="Address of the Customer" required /></div> 
+      <div class="form-name">Postal Code :<br><input style="font-family: Quicksand, sans-serif;" type="text" id="Address" th:field="*{PostalCode}" placeholder="Address of the Customer" required /></div> 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
   </div>
+  </p1>
   </main>
   <script type="text/javascript"></script>
 </body>
