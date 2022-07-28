@@ -1,6 +1,10 @@
-/* Basic CSS For the Staff Information Submission form */
+/* Basic CSS For the Staff Information Display Page */
+body {
+	background-image: url("staffBG.png");
+}
+
 h1 {
-	background-color: #d4d6df;
+	background-color: #bcd6bc;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 	font-family: "Quicksand", sans-serif; color: white;
 	border: 1px solid black;
@@ -8,16 +12,21 @@ h1 {
 }
 
 h2 {
-	font-family: "Quicksand", sans-serif;
-	border: 1px solid black;
 	background-color: white;
-	display: black;
+	border: 1px solid black;
+	margin: auto;
+	width: 50%;
+	font-family: "Quicksand", sans-serif;
 	text-align: center;
 	font-size: 20px;
+	background-color: white;
+	margin: auto;
+	width: 50%
+	border: 1px solid black;
 }
 
 p1 {
-	background-color: #d4d6df;
+	background-color: #bcd6bc;
 	font-family: "Quicksand", sans-serif; color: black;
 	text-align: center;
 	border: 1px solid black;
@@ -27,7 +36,8 @@ p1 {
 	width: 75%;
 }
 
-form-data {
+/* Stuff relating to forms and tables commented until I can properly test it */
+/*form-data {
 	background-color: black;
 	border-radius: 1px;
 	border: 2px solid grey;
@@ -49,4 +59,4 @@ th {
 td {
 	background-color: white;
 	font-family: "Quicksand", sans-serif;
-}
+}*/
