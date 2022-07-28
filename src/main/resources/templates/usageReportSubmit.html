@@ -11,23 +11,25 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
     crossorigin="anonymous"
   >
-  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/partSubmit.css">
   <title>Tool Usage Report</title>
 </head>
 
 <body>
   <main>
   <h1>Add a new Usage Report's details</h1>
-  <h4>Enter the details for the new Usage Report</h4>
+  <p1>
+  <h2>Enter the details for the new Usage Report</h2>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/usageReportSubmitForm}" th:object="${UsageReport}">
-      <div class="form-name">Tool ID: <input style="font-family: Quicksand, sans-serif;" type="number" id="ToolID" th:field="*{ToolID}" placeholder="Id of the Tool" required /></div> 
-      <div class="form-name">Work Report ID: <input style="font-family: Quicksand, sans-serif;" type="number" id="RepairID" th:field="*{RepairID}" placeholder="Id of the Work Report" required /></div> 
-      <div class="form-name">Message: <input style="font-family: Quicksand, sans-serif;" type="text" id="UsageReport" th:field="*{Message}" placeholder="Message of the Usage Report" required /></div> 
+	    <div class="form-name">Tool ID: <br><input style="font-family: Quicksand, sans-serif;" type="number" id="ToolID" th:field="*{ToolID}" placeholder="Id of the Tool" required /></div> 
+	    <div class="form-name">Work Report ID:<br> <input style="font-family: Quicksand, sans-serif;" type="number" id="RepairID" th:field="*{RepairID}" placeholder="Id of the Work Report" required /></div> 
+	    <div class="form-name">Message: <br><input style="font-family: Quicksand, sans-serif;" type="text" id="UsageReport" th:field="*{Message}" placeholder="Message of the Usage Report" required /></div> 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
   </div>
+  </p1>
   </main>
   <script type="text/javascript"></script>
 </body>

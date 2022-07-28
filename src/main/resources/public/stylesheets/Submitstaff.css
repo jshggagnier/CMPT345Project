@@ -12,6 +12,11 @@ h1 {
 }
 
 h2 {
+	background-color: white;
+	border: 1px solid black;
+	display: block;
+	margin: auto;
+	width: 50%;
 	font-family: "Quicksand", sans-serif;
 	text-align: center;
 	font-size: 20px;

@@ -11,7 +11,8 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
     crossorigin="anonymous"
   >
-  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/Submitworkorder.css">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/partSubmit.css">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/partView.css">
   <title>Submit Tool</title>
 </head>
 
@@ -19,11 +20,12 @@
 <body>
   <main>
   <h1>Add a new Tool's details</h1>
-  <h4>Enter the details for the new Tool</h4>
+  <p1>
+  <h2>Enter the details for the new Tool</h2>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/toolEditForm}" th:object="${Tool}">
-      <div class="form-name" hidden>Tool Id: <input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNum" th:field="*{OrderNum}" th:value="${WorkOrder.OrderNum}" required /></div>
-      <div class="form-name">Tool Name: <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" th:field="*{StartDate}" th:value="${WorkOrder.StartDate}" placeholder="Date Submitted the Work Order" required /></div>
+	    <div class="form-name" hidden>Tool Id: <br><input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNum" th:field="*{OrderNum}" th:value="${WorkOrder.OrderNum}" required /></div>
+	    <div class="form-name">Tool Name: <br><input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" th:field="*{StartDate}" th:value="${WorkOrder.StartDate}" placeholder="Date Submitted the Work Order" required /></div>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
@@ -43,6 +45,7 @@
     <td th:text="${n.CloseWorkorder}"></td>
   </tr>
   </table>
+  </p1>
   <a class="dropdown-item" th:href="@{/workReportSubmit/{OrderNum}(OrderNum=${WorkOrder.OrderNum})}">Submit a Work Report</a>
   </main>
   <script type="text/javascript"></script>
