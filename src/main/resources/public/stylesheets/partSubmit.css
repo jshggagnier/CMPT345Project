@@ -1,4 +1,8 @@
-/* Basic CSS For the Customer Information Submission form */
+/* Basic CSS For the Part Information Submission form */
+body {
+	background-image: url("images/itemBG.png");
+}
+
 h1 {
 	background-color: #B71b1b;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
