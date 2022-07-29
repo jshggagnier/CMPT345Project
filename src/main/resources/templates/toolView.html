@@ -46,13 +46,8 @@
         <th class="header-name" > Tool Name </th>
         
         <tr th:each="n:${Tools}">
-          <td th:text="${n.ToolId}"></td>
+          <td th:text="${n.ToolID}"></td>
           <td th:text="${n.ToolName}"></td>
-          <td>
-            <!-- <form th:action="@{/ToolEdit/{ToolId}(ToolId=${n.ToolId})}"> -->
-              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
-            </form>
-          </td>
         </tr>
         
     </table>
