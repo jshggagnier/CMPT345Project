@@ -26,7 +26,7 @@
       <div class="form-name">Date: <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" th:field="*{StartDate}" th:value="${WorkOrder.StartDate}" placeholder="Date Submitted the Work Order" required /></div>
       <div class="form-name">StaffID: <body th:text="${Customer.Name}"></body></div>      
       <div class="form-name">Message: <input style="font-family: Quicksand, sans-serif;" type="text" id="CustName" th:field="*{Description}" th:value="${WorkOrder.Description}" placeholder="Short Description of Fault" required /></div>
-      <div class="form-name">Whether or not this closed the workorder: <input style="font-family: Quicksand, sans-serif;" type="text" id="ClaimID" th:field="*{ClaimID}" th:value="${WorkOrder.ClaimID}" placeholder="Warranty Claim ID" required /></div>
+      <div class="form-name">Warranty claim ID: <input style="font-family: Quicksand, sans-serif;" type="text" id="ClaimID" th:field="*{ClaimID}" th:value="${WorkOrder.ClaimID}" placeholder="Warranty Claim ID" required /></div>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
@@ -37,7 +37,7 @@
     <th>Date</th>
     <th>|Staff ID</th>
     <th>|Message</th>
-    <th>|Does this end the workorder?</th>
+    <th>|Status Toggle</th>
   </tr>
   <tr th:each="n:${WorkReports}">
     <td th:text="${n.Date}"></td>
@@ -46,7 +46,7 @@
     <td th:text="${n.CloseWorkorder}"></td>
   </tr>
   </table>
-  <a class="dropdown-item" th:href="@{/workReportSubmit/{OrderNum}(OrderNum=${WorkOrder.OrderNum})}">Submit a Work Report</a>
+  <button th:onclick="|window.location.href='/workReportSubmit/${WorkOrder.OrderNum}'|" class="SubmitButton">Submit a Work Report</button>
   </main>
   <script type="text/javascript"></script>
 </body>

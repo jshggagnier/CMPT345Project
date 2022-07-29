@@ -16,6 +16,7 @@
 
 package com.example;
 
+import org.apache.commons.lang3.ObjectUtils.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -101,6 +102,22 @@ public class WorkReportController {
       System.out.println(sql);
       stmt.executeUpdate(sql);
 
+      if(workReport.isCloseWorkorder())
+      {
+        ResultSet rs = stmt.executeQuery(("SELECT * FROM Workorders WHERE OrderNum = " + workReport.getOrderNum()));
+        rs.next();
+        if(rs.getString("EndDate")==null)
+        {
+          sql = "UPDATE Workorders SET EndDate='"+workReport.getDate()+"' WHERE OrderNum='"+workReport.getOrderNum()+"';";
+        }
+        else
+        {
+          sql = "UPDATE Workorders SET EndDate=NULL WHERE OrderNum='"+workReport.getOrderNum()+"';";
+        }
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
+      }
+      
       return "redirect:/WorkOrderEdit/"+workReport.getOrderNum()+"?";
     } catch (Exception e) {
       model.put("message", e.getMessage());

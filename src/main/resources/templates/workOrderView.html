@@ -11,7 +11,7 @@
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
     crossorigin="anonymous"
   >
-  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/customerView.css">
+  <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/workorderView.css">
 
   <!--Font & Icon import-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
@@ -39,30 +39,90 @@
 <body style="font-family: Quicksand, sans-serif;">
   <div class="db-container">
     <h1 style="font-weight: bolder;">Work Orders</h1><br>
-
+    <div>Hide Finished Orders: <input type="checkbox" onclick="updatefilters()" id="hidefinished"></div>
+    <div>Hide Unfinished Orders: <input type="checkbox" onclick="updatefilters()" id="hideunfinished"></div>
+    <div>Show Only New Orders: <input type="checkbox" onclick="updatefilters()" id="showonlynew"></div>
     <table id="WorkOrderViewTable"class="styled-table">
-      <tr class="table-header" style="color: rgb(0, 0, 0);">
+      <tr class="table-header">
         <th class="header-name">Order Number |</th>
         <th class="header-name" >Customer Number |</th>
         <th class="header-name">Start Date |</th>
+        <th class="header-name">End Date |</th>
         <th class="header-name">Description |</th>
         <th class="header-name">Claim ID</th>
-        
-        <tr th:each="n:${WorkOrders}">
-          <td th:text="${n.OrderNum}"></td>
-          <td th:text="${n.CustomerNum}"></td>
-          <td th:text="${n.StartDate}"></td>
-          <td th:text="${n.Description}"></td>
-          <td th:text="${n.ClaimID}"></td>
+      </tr>
+      <tr th:each="n:${openWorkOrders}" th:id="open">
+        <td th:text="${n.OrderNum}"></td>
+        <td th:text="${n.CustomerNum}"></td>
+        <td th:text="${n.StartDate}"></td>
+        <td th:text="${n.EndDate}"></td>
+        <td th:text="${n.Description}"></td>
+        <td th:text="${n.ClaimID}"></td>
+        <td>
+          <form th:action="@{/WorkOrderEdit/{OrderNum}(OrderNum=${n.OrderNum})}">
+            <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
+          </form>
+        </td>
+      </tr>
+        <tr th:each="a:${closedWorkOrders}" th:id="closed">
+          <td th:text="${a.OrderNum}"></td>
+          <td th:text="${a.CustomerNum}"></td>
+          <td th:text="${a.StartDate}"></td>
+          <td th:text="${a.EndDate}"></td>
+          <td th:text="${a.Description}"></td>
+          <td th:text="${a.ClaimID}"></td>
           <td>
-            <form th:action="@{/WorkOrderEdit/{OrderNum}(OrderNum=${n.OrderNum})}">
+            <form th:action="@{/WorkOrderEdit/{OrderNum1}(OrderNum1=${a.OrderNum})}">
               <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
             </form>
           </td>
         </tr>
-        
+        <tr th:each="b:${newWorkOrders}" th:id="new" hidden>
+          <td th:text="${b.OrderNum}"></td>
+          <td th:text="${b.CustomerNum}"></td>
+          <td th:text="${b.StartDate}"></td>
+          <td th:text="${b.EndDate}"></td>
+          <td th:text="${b.Description}"></td>
+          <td th:text="${b.ClaimID}"></td>
+          <td>
+            <form th:action="@{/WorkOrderEdit/{OrderNum2}(OrderNum2=${b.OrderNum})}">
+              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
+            </form>
+          </td>
+        </tr>
     </table>
   </div>
   <script type="text/javascript"></script>
+  <script th:inline="javascript">
+    function updatefilters()
+    {
+        if (document.getElementById('showonlynew').checked)
+        {
+          document.getElementById('hidefinished').checked = true;
+          document.getElementById('hideunfinished').checked = true;
+          document.getElementById('new').hidden = false;
+        }
+        else
+        {
+          document.getElementById('new').hidden = true;
+        }
+        if (document.getElementById('hidefinished').checked)
+        {
+          document.getElementById('closed').hidden = true;
+        }
+        else
+        {
+          document.getElementById('closed').hidden = false;
+        }
+        if (document.getElementById('hideunfinished').checked)
+        {
+          document.getElementById('open').hidden = true;
+        }
+        else
+        {
+          document.getElementById('open').hidden = false;
+        }
+    }
+  </script>
 </body>
 </html>
