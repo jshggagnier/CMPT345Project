@@ -56,7 +56,7 @@ public class PartController {
       ArrayList<Part> dataList = new ArrayList<Part>();
       while (rs1.next()) {
         Part obj = new Part();
-        obj.setPartId(rs1.getInt("PartId"));
+        obj.setPartID(rs1.getInt("PartId"));
         obj.setPartName(rs1.getString("PartName"));       
         dataList.add(obj);
       }

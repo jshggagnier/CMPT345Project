@@ -3,7 +3,7 @@ package com.example;
 public class Part {
     String PartName;
     String PartDescription;
-    int PartId;
+    int PartID;
 
     public String getPartName() {
         return this.PartName;
@@ -21,12 +21,12 @@ public class Part {
         this.PartDescription = PartDescription;
     }
 
-    public int getPartId() {
-        return this.PartId;
+    public int getPartID() {
+        return this.PartID;
     }
 
-    public void setPartId(int PartId) {
-        this.PartId = PartId;
+    public void setPartID(int PartID) {
+        this.PartID = PartID;
     }
     
 }

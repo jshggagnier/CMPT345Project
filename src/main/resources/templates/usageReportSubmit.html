@@ -15,6 +15,9 @@
   <title>Tool Usage Report</title>
 </head>
 
+
+
+
 <body>
   <main>
   <h1>Add a new Usage Report's details</h1>
@@ -22,11 +25,30 @@
   <h2>Enter the details for the new Usage Report</h2>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/usageReportSubmitForm}" th:object="${UsageReport}">
-	    <div class="form-name">Tool ID: <br><input style="font-family: Quicksand, sans-serif;" type="number" id="ToolID" th:field="*{ToolID}" placeholder="Id of the Tool" required /></div> 
-	    <div class="form-name">Work Report ID:<br> <input style="font-family: Quicksand, sans-serif;" type="number" id="RepairID" th:field="*{RepairID}" placeholder="Id of the Work Report" required /></div> 
-	    <div class="form-name">Message: <br><input style="font-family: Quicksand, sans-serif;" type="text" id="UsageReport" th:field="*{Message}" placeholder="Message of the Usage Report" required /></div> 
+	    <div class="form-name">Choose a part to use (if any): 
+        <select th:field="*{ToolID}">
+          <option value="0" disabled selected hidden>Choose part</option>
+          <option th:each="tool : ${Tools}" th:value="${tool.ToolID}" th:text="${tool.ToolName}"></option>
+        </select>
+      </div>
+      <div class="form-name">Choose a part to use (if any): 
+      <select th:field="*{PartID}">
+        <option value="0" disabled selected hidden>Choose tool</option>
+        <option th:each="part : ${Parts}" th:value="${part.PartID}" th:text="${part.PartName}"></option>
+      </select>
+      </div>
+      <div class="form-name">Choose an Active Repair for this report: 
+      <select th:field="*{RepairID}">
+        <option th:each="order : ${openWorkOrders}" th:value="${order.OrderNum}" th:text="${order.Description}"></option>
+      </select>
+      </div>
+      <div class="form-name">Date</div> 
+      <input style="font-family: Quicksand, sans-serif;" type="date" id="Date" 
+                th:field="*{Date}" placeholder="Date of the Work Report" required />
+      <br>
+      <div class="form-name">Message: <br><input style="font-family: Quicksand, sans-serif;" type="text" id="UsageReport" th:field="*{Message}" placeholder="Message of the Usage Report" required /></div> 
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
-      <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
+      <input style="font-family: Quicksand, sans-serif;" class="reset" type="reset" value="Reset">
     </form>
   </div>
   </p1>

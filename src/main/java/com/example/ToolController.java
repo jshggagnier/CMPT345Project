@@ -53,7 +53,7 @@ public class ToolController {
       ArrayList<Tool> dataList = new ArrayList<Tool>();
       while (rs.next()) {
         Tool obj = new Tool();
-        obj.setToolId(rs.getInt("ToolId"));
+        obj.setToolID(rs.getInt("ToolId"));
         obj.setToolName(rs.getString("ToolName"));
         dataList.add(obj);
       }
@@ -73,7 +73,7 @@ public class ToolController {
       ArrayList<Tool> dataList = new ArrayList<Tool>();
       while (rs.next()) {
         Tool obj = new Tool();
-        obj.setToolId(rs.getInt("ToolId"));
+        obj.setToolID(rs.getInt("ToolId"));
         obj.setToolName(rs.getString("ToolName"));
         dataList.add(obj);
       }
@@ -108,7 +108,7 @@ public class ToolController {
       ResultSet rs = stmt.executeQuery(("SELECT * FROM Tools WHERE ToolId = " + nid)); // this should only ever run once, since OrderNum is serial
       Tool tool = new Tool();
       while (rs.next()) {
-        tool.setToolId(rs.getInt("ToolId"));
+        tool.setToolID(rs.getInt("ToolId"));
         tool.setToolName(rs.getString("ToolName"));
       }
       model.put("Tool", tool);

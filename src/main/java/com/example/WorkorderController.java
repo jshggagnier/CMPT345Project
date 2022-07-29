@@ -84,7 +84,7 @@ public class WorkorderController {
         obj.setCustomerNum(rs.getInt("CustomerNum"));
         dataList.add(obj);
       }
-      model.put("openWorkOrders", dataList);
+      model.put("closedWorkOrders", dataList);
       ResultSet rs2 = stmt.executeQuery("SELECT * FROM Workorders WHERE enddate IS NULL");
       ArrayList<Workorder> dataList2 = new ArrayList<Workorder>();
       while (rs2.next()) {
@@ -97,7 +97,7 @@ public class WorkorderController {
         obj.setCustomerNum(rs2.getInt("CustomerNum"));
         dataList2.add(obj);
       }
-      model.put("closedWorkOrders", dataList2);
+      model.put("openWorkOrders", dataList2);
       ResultSet rs3 = stmt.executeQuery(("SELECT * FROM Workorders"));
       ArrayList<Workorder> dataList3 = new ArrayList<Workorder>();
       while (rs3.next()) {
@@ -159,7 +159,7 @@ public class WorkorderController {
         customer.setAddress(rs2.getString("Address"));
       }
       ResultSet rs3 = stmt.executeQuery(("SELECT * FROM WorkReports WHERE OrderNum = " + workorder.getOrderNum()));
-      ArrayList<WorkReport> dataList = new ArrayList<WorkReport>();
+      ArrayList<WorkReport> WorkReports = new ArrayList<WorkReport>();
       while (rs3.next()) {
         WorkReport obj = new WorkReport();
         obj.setOrderNum(rs3.getInt("OrderNum"));
@@ -167,9 +167,20 @@ public class WorkorderController {
         obj.setDate(rs3.getString("Date"));
         obj.setMessage(rs3.getString("Message"));
         obj.setCloseWorkorder(rs3.getBoolean("CloseWorkorder"));
+        WorkReports.add(obj);
+      }
+      ResultSet rs4 = stmt.executeQuery(("SELECT * FROM UsageReports WHERE RepairID = " + workorder.getOrderNum()));
+      ArrayList<Usagereport> dataList = new ArrayList<Usagereport>();
+      while (rs4.next()) {
+        Usagereport obj = new Usagereport();
+        obj.setPartID(rs4.getInt("PartId"));
+        obj.setToolID(rs4.getInt("ToolID"));
+        obj.setDate(rs4.getString("Date"));
+        obj.setMessage(rs4.getString("Message"));
         dataList.add(obj);
       }
-      model.put("WorkReports",dataList);
+      model.put("UsageReports",dataList);
+      model.put("WorkReports",WorkReports);
       model.put("Customer", customer);
       model.put("WorkOrder", workorder);
       return "workOrderEdit";

@@ -47,6 +47,23 @@
   </tr>
   </table>
   <button th:onclick="|window.location.href='/workReportSubmit/${WorkOrder.OrderNum}'|" class="SubmitButton">Submit a Work Report</button>
+
+  <h2>Usage Reports:</h2>
+  <table id="WorkOrderViewTable"class="styled-table">
+  <tr>
+    <th>Date</th>
+    <th>|Part ID</th>
+    <th>|Tool ID</th>
+    <th>|Message</th>
+  </tr>
+  <tr th:each="n:${UsageReports}">
+    <td th:text="${n.Date}"></td>
+    <td th:text="${n.PartID}"></td>
+    <td th:text="${n.ToolID}"></td>
+    <td th:text="${n.Message}"></td>
+  </tr>
+  </table>
+  <button th:onclick="|window.location.href='/usageReportSubmit'|" class="SubmitButton">Submit a Usage Report</button>
   </main>
   <script type="text/javascript"></script>
 </body>
