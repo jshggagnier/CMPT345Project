@@ -26,19 +26,19 @@
   <h2>Enter the details for the new Usage Report</h2>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/usageReportSubmitForm}" th:object="${UsageReport}">
-	    <div class="form-name">Choose a part to use (if any): 
+	    <div class="form-name" style="font-weight: bolder;">Choose a part to use (if any): 
         <select th:field="*{ToolID}">
           <option value="0" disabled selected hidden>Choose part</option>
           <option th:each="tool : ${Tools}" th:value="${tool.ToolID}" th:text="${tool.ToolName}"></option>
         </select>
       </div>
-      <div class="form-name">Choose a part to use (if any): 
+      <div class="form-name" style="font-weight: bolder;">Choose a part to use (if any): 
       <select th:field="*{PartID}">
         <option value="0" disabled selected hidden>Choose tool</option>
         <option th:each="part : ${Parts}" th:value="${part.PartID}" th:text="${part.PartName}"></option>
       </select>
       </div>
-      <div class="form-name">Choose an Active Repair for this report: 
+      <div class="form-name" style="font-weight: bolder;">Choose an Active Repair for this report: 
       <select th:field="*{RepairID}">
         <option th:each="order : ${openWorkOrders}" th:value="${order.OrderNum}" th:text="${order.Description}"></option>
       </select>

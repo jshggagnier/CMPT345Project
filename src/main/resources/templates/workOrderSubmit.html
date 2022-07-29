@@ -29,10 +29,10 @@
       <select th:field="*{CustomerNum}" required>
         <option th:each="cust : ${Customers}" th:value="${cust.CustIdentifier}" th:text="${cust.Name}"></option>
       </select>
-      <br><a th:href="@{/customerSubmit}">Add New Customer</a>
+      <br><a th:href="@{/customerSubmit}">(Add New Customer)</a>
       </div>
       <div class="form-name">Description of Fault:<br> <input style="font-family: Quicksand, sans-serif;" type="text" id="CustName" th:field="*{Description}" placeholder="Short Description of Fault" required /></div>
-      <div class="form-name">ClaimID: <input style="font-family: Quicksand, sans-serif;" type="text" id="ClaimID" th:field="*{ClaimID}" placeholder="Warranty Claim ID" required /></div>
+      <div class="form-name">ClaimID:<br> <input style="font-family: Quicksand, sans-serif;" type="text" id="ClaimID" th:field="*{ClaimID}" placeholder="Warranty Claim ID" required /></div>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
