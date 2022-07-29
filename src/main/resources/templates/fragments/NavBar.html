@@ -25,8 +25,6 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" th:href="@{/staffSubmit}">Add a Staff Member</a></li>
                 <li><a class="dropdown-item" th:href="@{/staffView}">Staff Information</a></li>
-                <li><a class="dropdown-item" th:href="@{/technicianWorkReportSubmit}">Submit a Work Report</a></li>
-                <li><a class="dropdown-item" th:href="@{/technicianWorkReportView}">Work Reports</a></li>
                 <li><a class="dropdown-item" th:href="@{/certificationSubmit}">Add a Certification</a></li>
                 <li><a class="dropdown-item" th:href="@{/certificationView}">Certifications</a></li>
               </ul>
@@ -54,7 +52,6 @@
                 <li><a class="dropdown-item" th:href="@{/toolSubmit}">Submit a Tool</a></li>
                 <li><a class="dropdown-item" th:href="@{/toolView}">Tools</a></li>
                 <li><a class="dropdown-item" th:href="@{/usageReportSubmit}">Submit a Usage Report</a></li>
-                <li><a class="dropdown-item" th:href="@{/usageReportView}">Usage Reports</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -67,6 +64,11 @@
                 <li><a class="dropdown-item" th:href="@{/warrantyDivisionSubmit}">Warranty Division Submit</a></li>
                 <li><a class="dropdown-item" th:href="@{/warrantyDivisionView}">Warranty Divisions</a></li>
               </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" th:href="@{/ResetDatabase}" aria-expanded="false">
+                Reinitialize Database
+              </a>
             </li>
           </ul>
         </div>

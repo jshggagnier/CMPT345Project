@@ -78,6 +78,21 @@ public class Main implements CommandLineRunner {
     return "index";
   }
 
+  @RequestMapping("/ResetDatabase")
+  String ResetDatabase() {
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      stmt.executeUpdate("DROP SCHEMA public CASCADE");
+      stmt.executeUpdate("CREATE SCHEMA public");
+      System.out.println("Wipe Complete: Reinitializing");
+      run("");
+    }
+    catch (Exception e) {
+      System.out.println(e);
+    }
+    return "index";
+  }
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
