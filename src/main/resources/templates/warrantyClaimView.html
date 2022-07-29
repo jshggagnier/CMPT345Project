@@ -38,11 +38,13 @@
 
 <body style="font-family: Quicksand, sans-serif;">
   <div class="db-container">
-    <h1 style="font-weight: bolder;">View Warranty Claims</h1><br>
+    <h1 style="font-weight: bolder;">View Warranty Claims</h1>
+    <p1>
+    <br>
 
     <table id="WarrantyDivisionViewTable"class="styled-table">
       <tr class="table-header" style="color: rgb(0, 0, 0);">
-        <th class="header-name"> Warranty ID |</th>
+        <th class="header-name"> Warranty ID </th>
         <th class="header-name" > Brand </th>
         
         <tr th:each="n:${WarrantyClaims}">
@@ -57,6 +59,8 @@
         </tr>
         
     </table>
+    <br>
+    </p1>
   </div>
   <script type="text/javascript"></script>
 </body>

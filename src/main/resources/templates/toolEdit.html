@@ -21,6 +21,7 @@
   <main>
   <h1>Add a new Tool's details</h1>
   <p1>
+  <br>
   <h2>Enter the details for the new Tool</h2>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/toolEditForm}" th:object="${Tool}">
@@ -34,9 +35,9 @@
   <table id="WorkOrderViewTable"class="styled-table">
   <tr>
     <th>Date</th>
-    <th>|Staff ID</th>
-    <th>|Message</th>
-    <th>|Does this end the workorder?</th>
+    <th>Staff ID</th>
+    <th>Message</th>
+    <th>Does this end the workorder?</th>
   </tr>
   <tr th:each="n:${WorkReports}">
     <td th:text="${n.Date}"></td>
@@ -45,6 +46,7 @@
     <td th:text="${n.CloseWorkorder}"></td>
   </tr>
   </table>
+  <br>
   </p1>
   <a class="dropdown-item" th:href="@{/workReportSubmit/{OrderNum}(OrderNum=${WorkOrder.OrderNum})}">Submit a Work Report</a>
   </main>

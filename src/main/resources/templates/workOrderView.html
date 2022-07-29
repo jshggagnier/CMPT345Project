@@ -39,16 +39,18 @@
 <body style="font-family: Quicksand, sans-serif;">
   <div class="db-container">
     <h1 style="font-weight: bolder;">Work Orders</h1><br>
+    <p1>
+    <br>
     <div>Hide Finished Orders: <input type="checkbox" onclick="updatefilters()" id="hidefinished"></div>
     <div>Hide Unfinished Orders: <input type="checkbox" onclick="updatefilters()" id="hideunfinished"></div>
     <div>Show Only New Orders: <input type="checkbox" onclick="updatefilters()" id="showonlynew"></div>
     <table id="WorkOrderViewTable"class="styled-table">
       <tr class="table-header">
-        <th class="header-name">Order Number |</th>
-        <th class="header-name" >Customer Number |</th>
-        <th class="header-name">Start Date |</th>
-        <th class="header-name">End Date |</th>
-        <th class="header-name">Description |</th>
+        <th class="header-name">Order Number </th>
+        <th class="header-name" >Customer Number </th>
+        <th class="header-name">Start Date </th>
+        <th class="header-name">End Date </th>
+        <th class="header-name">Description </th>
         <th class="header-name">Claim ID</th>
       </tr>
       <tr th:each="n:${openWorkOrders}" th:id="open">
@@ -91,6 +93,8 @@
           </td>
         </tr>
     </table>
+    <br>
+    </p1>
   </div>
   <script type="text/javascript"></script>
   <script th:inline="javascript">
