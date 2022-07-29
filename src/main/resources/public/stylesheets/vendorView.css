@@ -1,6 +1,6 @@
 /* Basic CSS For the Staff Information Display Page */
 body {
-	background-image: url("staffBG.png");
+	background-image: url("images/staffBG.png");
 }
 
 h1 {
@@ -36,27 +36,36 @@ p1 {
 	width: 75%;
 }
 
-/* stuff relating to forms and tables commented until I can properly test it.
+/* stuff relating to forms and tables commented until I can properly test it.*/
 form-data {
 	background-color: black;
 	border-radius: 1px;
 	border: 2px solid grey;
 }
 
-styled-table {
-	background-color: black;
-	border: 1px solid black;
-	border-radius: 5px;
+table {
 	font-family: "Quicksand", sans-serif;
+	display: black;
+	text-align: center;
+	margin: auto;
+	width: 50%;
 }
 
 th {
 	font-weight: bolder;
 	background-color: white;
 	font-family: "Quicksand", sans-serif;
+	border: 1px solid black;
+	padding: 2px;
+	text-align: center;
+	margin: auto;	
 }
 
 td {
 	background-color: white;
 	font-family: "Quicksand", sans-serif;
-}*/
+	border: 1px solid black;
+	padding: 2px;
+	text-align: center;
+	margin: auto;
+}

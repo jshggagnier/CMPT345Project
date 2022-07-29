@@ -40,10 +40,12 @@
   <div class="db-container">
     <h1 style="font-weight: bolder;">View Warranty Claims</h1><br>
 
+    <p1>
+    <br>
     <table id="VendorsViewTable"class="styled-table">
       <tr class="table-header" style="color: rgb(0, 0, 0);">
-        <th class="header-name"> Vendor Name |</th>
-        <th class="header-name" > Contact Informaion | </th>
+        <th class="header-name"> Vendor Name </th>
+        <th class="header-name" > Contact Informaion  </th>
         <th class="header-name" > Billing and Shipping Address </th>
         
         <tr th:each="n:${Vendors}">
@@ -59,6 +61,8 @@
         </tr>
         
     </table>
+    <br>
+    </p1>
   </div>
   <script type="text/javascript"></script>
 </body>

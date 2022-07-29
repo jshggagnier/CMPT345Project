@@ -40,11 +40,13 @@
   <div class="db-container">
     <h1 style="font-weight: bolder;">View Customers</h1><br>
 
+    <p1>
+    <br>
     <table id="WorkOrderViewTable"class="styled-table">
       <tr class="table-header" style="color: rgb(0, 0, 0);">
         <th class="header-name">Part ID</th>
-        <th class="header-name" >|Part Name </th>
-        <th class="header-name">|Part Description</th>
+        <th class="header-name" >Part Name </th>
+        <th class="header-name">Part Description</th>
         
         <tr th:each="n:${Parts}">
           <td th:text="${n.PartID}"></td>
@@ -58,6 +60,8 @@
         </tr>
         
     </table>
+    <br>
+    </p1>
   </div>
   <script type="text/javascript"></script>
 </body>
