@@ -33,7 +33,8 @@
       </div>
       <div class="form-name">Description of Fault:<br> <input style="font-family: Quicksand, sans-serif;" type="text" id="CustName" th:field="*{Description}" placeholder="Short Description of Fault" required /></div>
       <div class="form-name">ClaimID:<br>
-      <select th:field="*{ClaimID}" required>
+      <select th:field="*{ClaimID}">
+        <option selected value=''>No Warranty Claim</option>
         <option th:each="claim : ${WarrantyClaims}" th:value="${claim.WarrantyID}" th:text="${claim.WarrantyID}"></option>
       </select>
       <br><a th:href="@{/warrantyClaimSubmit}">(Add New WarrantyClaim)</a> 

@@ -81,42 +81,43 @@ public class WorkorderController {
   String viewWorkOrders(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery("SELECT * FROM Workorders WHERE enddate IS NOT NULL");
-      ArrayList<Workorder> dataList = new ArrayList<Workorder>();
+      ResultSet rs = stmt.executeQuery(("SELECT OrderNum,startdate,enddate,ClaimID,Description,name FROM Workorders,Customers WHERE Workorders.CustomerNum=Customers.custidentifier AND Workorders.enddate IS NOT NULL"));
+      ArrayList<TableArray> dataList = new ArrayList<TableArray>();
       while (rs.next()) {
-        Workorder obj = new Workorder();
-        obj.setOrderNum(rs.getInt("OrderNum"));
-        obj.setStartDate(rs.getString("startdate"));
-        obj.setEndDate(rs.getString("enddate"));
-        obj.setClaimID(rs.getString("ClaimID"));
-        obj.setDescription(rs.getString("Description"));
-        obj.setCustomerNum(rs.getInt("CustomerNum"));
+        TableArray obj = new TableArray();
+        obj.setFirstString(rs.getString("OrderNum"));
+        obj.setThirdString(rs.getString("startdate"));
+        obj.setFourthString(rs.getString("enddate"));
+        obj.setFifthString(rs.getString("ClaimID"));
+        obj.setSixthString(rs.getString("Description"));
+        obj.setSecondString(rs.getString("name"));
         dataList.add(obj);
       }
       model.put("closedWorkOrders", dataList);
-      ResultSet rs2 = stmt.executeQuery("SELECT * FROM Workorders WHERE enddate IS NULL");
-      ArrayList<Workorder> dataList2 = new ArrayList<Workorder>();
+      ResultSet rs2 = stmt.executeQuery(("SELECT OrderNum,startdate,enddate,ClaimID,Description,name FROM Workorders,Customers WHERE Workorders.CustomerNum=Customers.custidentifier AND Workorders.enddate IS NULL"));
+      ArrayList<TableArray> dataList2 = new ArrayList<TableArray>();
       while (rs2.next()) {
-        Workorder obj = new Workorder();
-        obj.setOrderNum(rs2.getInt("OrderNum"));
-        obj.setStartDate(rs2.getString("startdate"));
-        obj.setEndDate(rs2.getString("enddate"));
-        obj.setClaimID(rs2.getString("ClaimID"));
-        obj.setDescription(rs2.getString("Description"));
-        obj.setCustomerNum(rs2.getInt("CustomerNum"));
+        TableArray obj = new TableArray();
+        obj.setFirstString(rs2.getString("OrderNum"));
+        obj.setThirdString(rs2.getString("startdate"));
+        obj.setFourthString(rs2.getString("enddate"));
+        obj.setFifthString(rs2.getString("ClaimID"));
+        obj.setSixthString(rs2.getString("Description"));
+        obj.setSecondString(rs2.getString("name"));
         dataList2.add(obj);
       }
       model.put("openWorkOrders", dataList2);
-      ResultSet rs3 = stmt.executeQuery(("SELECT * FROM Workorders"));
-      ArrayList<Workorder> dataList3 = new ArrayList<Workorder>();
+      ResultSet rs3 = stmt.executeQuery(("SELECT OrderNum,startdate,enddate,ClaimID,Description,name FROM Workorders,Customers WHERE NOT EXISTS(SELECT * FROM Workorders,WorkReports WHERE Workorders.OrderNum = Workreports.OrderNum) AND Workorders.CustomerNum=Customers.custidentifier"));
+      ArrayList<TableArray> dataList3 = new ArrayList<TableArray>();
       while (rs3.next()) {
-        Workorder obj = new Workorder();
-        obj.setOrderNum(rs3.getInt("OrderNum"));
-        obj.setStartDate(rs3.getString("startdate"));
-        obj.setEndDate(rs3.getString("enddate"));
-        obj.setClaimID(rs3.getString("ClaimID"));
-        obj.setDescription(rs3.getString("Description"));
-        obj.setCustomerNum(rs3.getInt("CustomerNum"));
+        System.out.println("found one");
+        TableArray obj = new TableArray();
+        obj.setFirstString(rs3.getString("OrderNum"));
+        obj.setThirdString(rs3.getString("startdate"));
+        obj.setFourthString(rs3.getString("enddate"));
+        obj.setFifthString(rs3.getString("ClaimID"));
+        obj.setSixthString(rs3.getString("Description"));
+        obj.setSecondString(rs3.getString("name"));
         dataList3.add(obj);
       }
       model.put("newWorkOrders", dataList3);
@@ -132,7 +133,9 @@ public class WorkorderController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      String sql = "INSERT INTO Workorders (CustomerNum,ClaimID,StartDate,Description) VALUES ("+workorder.getCustomerNum()+", '"+workorder.getClaimID()+"', '"+workorder.getStartDate()+"', '"+workorder.getDescription()+"')";
+      String sql;
+      if(workorder.getClaimID().equals("")) {sql = "INSERT INTO Workorders (CustomerNum,StartDate,Description) VALUES ("+workorder.getCustomerNum()+", '"+workorder.getStartDate()+"', '"+workorder.getDescription()+"')";}
+      else{sql = "INSERT INTO Workorders (CustomerNum,ClaimID,StartDate,Description) VALUES ("+workorder.getCustomerNum()+", '"+workorder.getClaimID()+"', '"+workorder.getStartDate()+"', '"+workorder.getDescription()+"')";}
       System.out.println(sql);
       stmt.executeUpdate(sql);
 
