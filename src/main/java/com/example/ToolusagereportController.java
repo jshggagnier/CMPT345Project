@@ -42,11 +42,11 @@ public class ToolusagereportController {
     @Autowired
     private DataSource dataSource;
   
-    @GetMapping("/toolusagereportSubmit")
+    @GetMapping("/toolusageReportSubmit")
     String toolusageReportSubmit(Map<String, Object> model) {
       try (Connection connection = dataSource.getConnection()) {
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(("SELECT * FROM toollist"));
+        ResultSet rs = stmt.executeQuery(("SELECT * FROM Tools"));
         ArrayList<Tool> dataList = new ArrayList<Tool>();
         while (rs.next()) {
           Tool obj = new Tool();
@@ -68,9 +68,10 @@ public class ToolusagereportController {
         dataList3.add(obj);
       }
       model.put("openWorkOrders", dataList3);
-        ToolUsageReport usagereport = new ToolUsageReport();
-        model.put("UsageReport", usagereport);
-        return "toolusageReportSubmit";
+      ToolUsageReport usagereport = new ToolUsageReport();
+      model.put("ToolUsageReport", usagereport);
+      System.out.println("page hit");
+      return "toolusageReportSubmit";
       } catch (Exception e) {
         model.put("message", e.getMessage());
         return "error";
@@ -83,7 +84,7 @@ public class ToolusagereportController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      String sql = "INSERT INTO UsageReports (Message, RepairID, ToolID, Date) VALUES ('"+UsageReport.getMessage()+"', '"+UsageReport.getRepairID()+"', '"+UsageReport.getToolID()+"', '"+UsageReport.getDate()+"')";
+      String sql = "INSERT INTO ToolUsageReports (Message, RepairID, ToolID, Date) VALUES ('"+UsageReport.getMessage()+"', '"+UsageReport.getRepairID()+"', '"+UsageReport.getToolID()+"', '"+UsageReport.getDate()+"')";
       // the above is handling the null values (which are zero in html), which will help greatly when submitting later (since we need it to be a foreign key.)
       System.out.println(sql);
       stmt.executeUpdate(sql);

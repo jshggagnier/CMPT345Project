@@ -25,7 +25,7 @@
   <br>
   <h2>Enter the details for the new Usage Report</h2>
   <div class="form-data">
-    <form action="#" method="post" th:action="@{/usageReportSubmitForm}" th:object="${UsageReport}">
+    <form action="#" method="post" th:action="@{/partusageReportSubmitForm}" th:object="${PartUsageReport}">
 	    <div class="form-name" style="font-weight: bolder;">Choose a Part to use (if any): 
         <select th:field="*{PartID}">
           <option th:each="Part : ${Parts}" th:value="${Part.PartID}" th:text="${Part.PartName}"></option>

@@ -69,7 +69,7 @@ public class PartusagereportController {
       }
       model.put("openWorkOrders", dataList3);
         PartUsageReport usagereport = new PartUsageReport();
-        model.put("UsageReport", usagereport);
+        model.put("PartUsageReport", usagereport);
         return "partusageReportSubmit";
       } catch (Exception e) {
         model.put("message", e.getMessage());
@@ -83,7 +83,6 @@ public class PartusagereportController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      
       String sql;
       sql = "INSERT INTO PartUsageReports (Message, RepairID,PartID, Date) VALUES ('"+UsageReport.getMessage()+"', '"+UsageReport.getRepairID()+"', '"+UsageReport.getPartID()+"', '"+UsageReport.getDate()+"')";
       System.out.println(sql);
