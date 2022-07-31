@@ -82,10 +82,10 @@ public class PartController {
       Statement stmt = connection.createStatement();
       String sql1 = "INSERT INTO PartList (PartName) VALUES ('"+Part.getPartName()+"')";
       String sql2 = "INSERT INTO PartDescriptions (PartName, PartDescription) VALUES ('"+Part.getPartName()+"', '"+Part.getPartDescription()+"')";
-      System.out.println(sql1);
-      stmt.executeUpdate(sql1);
       System.out.println(sql2);
       stmt.executeUpdate(sql2);
+      System.out.println(sql1);
+      stmt.executeUpdate(sql1);
       return "redirect:/partView";
     } catch (Exception e) {
       model.put("message", e.getMessage());

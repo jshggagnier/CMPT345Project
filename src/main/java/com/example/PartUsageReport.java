@@ -1,8 +1,7 @@
 package com.example;
 
-public class Usagereport {
+public class PartUsageReport {
     
-    private int ToolID;
     private int PartID;
     private int RepairID;
     private String Message;
@@ -14,14 +13,6 @@ public class Usagereport {
 
     public void setPartID(int PartID) {
         this.PartID = PartID;
-    }
-
-    public int getToolID() {
-        return this.ToolID;
-    }
-
-    public void setToolID(int ToolID) {
-        this.ToolID = ToolID;
     }
 
 

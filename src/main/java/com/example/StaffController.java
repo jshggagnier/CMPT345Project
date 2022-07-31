@@ -85,10 +85,10 @@ public class StaffController {
       Statement stmt = connection.createStatement();
       String sql1 = "INSERT INTO StaffDetails (Name, PhoneNumber) VALUES ('"+Staff.getName()+"', '"+Staff.getPhoneNumber()+"')";
       String sql2 = "INSERT INTO StaffRoles (Role) VALUES ('"+Staff.getRole()+"')";
-      System.out.println(sql1);
-      stmt.executeUpdate(sql1);
       System.out.println(sql2);
       stmt.executeUpdate(sql2);
+      System.out.println(sql1);
+      stmt.executeUpdate(sql1);
       return "redirect:/staffView";
     } catch (Exception e) {
       model.put("message", e.getMessage());

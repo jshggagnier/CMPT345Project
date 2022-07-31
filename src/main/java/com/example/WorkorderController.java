@@ -61,6 +61,15 @@ public class WorkorderController {
         dataList.add(obj);
       }
       model.put("Customers", dataList);
+      ResultSet rs20 = stmt.executeQuery(("SELECT * FROM WarrantyClaim"));
+      ArrayList<Warrantyclaim> dataList20 = new ArrayList<Warrantyclaim>();
+      while (rs20.next()) {
+        Warrantyclaim obj = new Warrantyclaim();
+        obj.setBrand(rs20.getString("Brand"));
+        obj.setWarrantyID(rs20.getString("WarrantyID"));
+        dataList20.add(obj);
+      }
+      model.put("WarrantyClaims", dataList20);
       return "workOrderSubmit";
     } catch (Exception e) {
       model.put("message", e.getMessage());
@@ -169,17 +178,35 @@ public class WorkorderController {
         obj.setCloseWorkorder(rs3.getBoolean("CloseWorkorder"));
         WorkReports.add(obj);
       }
-      ResultSet rs4 = stmt.executeQuery(("SELECT * FROM UsageReports WHERE RepairID = " + workorder.getOrderNum()));
-      ArrayList<Usagereport> dataList = new ArrayList<Usagereport>();
+      ResultSet rs4 = stmt.executeQuery(("SELECT * FROM ToolUsageReports WHERE RepairID = " + workorder.getOrderNum()));
+      ArrayList<ToolUsageReport> dataList = new ArrayList<ToolUsageReport>();
       while (rs4.next()) {
-        Usagereport obj = new Usagereport();
-        obj.setPartID(rs4.getInt("PartId"));
+        ToolUsageReport obj = new ToolUsageReport();
         obj.setToolID(rs4.getInt("ToolID"));
         obj.setDate(rs4.getString("Date"));
         obj.setMessage(rs4.getString("Message"));
         dataList.add(obj);
       }
-      model.put("UsageReports",dataList);
+      ResultSet rs5 = stmt.executeQuery(("SELECT * FROM PartUsageReports WHERE RepairID = " + workorder.getOrderNum()));
+      ArrayList<PartUsageReport> dataList2 = new ArrayList<PartUsageReport>();
+      while (rs5.next()) {
+        PartUsageReport obj = new PartUsageReport();
+        obj.setPartID(rs5.getInt("PartId"));
+        obj.setDate(rs5.getString("Date"));
+        obj.setMessage(rs5.getString("Message"));
+        dataList2.add(obj);
+      }
+      ResultSet rs20 = stmt.executeQuery(("SELECT * FROM WarrantyClaim"));
+      ArrayList<Warrantyclaim> dataList20 = new ArrayList<Warrantyclaim>();
+      while (rs20.next()) {
+        Warrantyclaim obj = new Warrantyclaim();
+        obj.setBrand(rs20.getString("Brand"));
+        obj.setWarrantyID(rs20.getString("WarrantyID"));
+        dataList20.add(obj);
+      }
+      model.put("WarrantyClaims", dataList20);
+      model.put("ToolUsageReports",dataList);
+      model.put("PartUsageReports", dataList2);
       model.put("WorkReports",WorkReports);
       model.put("Customer", customer);
       model.put("WorkOrder", workorder);

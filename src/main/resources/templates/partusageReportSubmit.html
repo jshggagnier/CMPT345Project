@@ -12,7 +12,7 @@
     crossorigin="anonymous"
   >
   <link rel="stylesheet" th:action="@{/viewDetails}" href="/stylesheets/partSubmit.css">
-  <title>Tool Usage Report</title>
+  <title>Part Usage Report</title>
 </head>
 
 
@@ -26,18 +26,12 @@
   <h2>Enter the details for the new Usage Report</h2>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/usageReportSubmitForm}" th:object="${UsageReport}">
-	    <div class="form-name" style="font-weight: bolder;">Choose a part to use (if any): 
-        <select th:field="*{ToolID}">
-          <option value="0" disabled selected hidden>Choose part</option>
-          <option th:each="tool : ${Tools}" th:value="${tool.ToolID}" th:text="${tool.ToolName}"></option>
+	    <div class="form-name" style="font-weight: bolder;">Choose a Part to use (if any): 
+        <select th:field="*{PartID}">
+          <option th:each="Part : ${Parts}" th:value="${Part.PartID}" th:text="${Part.PartName}"></option>
         </select>
       </div>
-      <div class="form-name" style="font-weight: bolder;">Choose a part to use (if any): 
-      <select th:field="*{PartID}">
-        <option value="0" disabled selected hidden>Choose tool</option>
-        <option th:each="part : ${Parts}" th:value="${part.PartID}" th:text="${part.PartName}"></option>
-      </select>
-      </div>
+      <button th:onclick="|window.location.href='/partSubmit'|" class="SubmitButton">Submit a Part</button>
       <div class="form-name" style="font-weight: bolder;">Choose an Active Repair for this report: 
       <select th:field="*{RepairID}">
         <option th:each="order : ${openWorkOrders}" th:value="${order.OrderNum}" th:text="${order.Description}"></option>

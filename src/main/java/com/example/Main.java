@@ -52,21 +52,23 @@ public class Main implements CommandLineRunner {
     //initialize all databases!
     try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID varchar(30), StartDate varchar(14), EndDate varchar(14), Description varchar(300))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WorkReports (OrderNum integer, StaffID integer, Message varchar(50), Date varchar(14), CloseWorkOrder varchar(10))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID varchar(30), Brand varchar(30))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyDivisions (Brand varchar(30), EmailContact varchar(30))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Vendors (VendorName varchar(30), EmailContact varchar(30), BillingShippingAddress varchar(30))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial,Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS AddressBook (Address varchar(50), PostalCode varchar(9))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS UsageReports (Message varchar(30), RepairID integer, ToolID integer, PartID integer, Date varchar(14))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffDetails (StaffId serial, Name varchar(30), PhoneNumber varchar(30))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffRoles (StaffId serial, Role varchar(30))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Tools (ToolId serial, ToolName varchar(30))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS PartList (PartId serial, PartName varchar(30))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS PartDescriptions (PartName varchar(30), PartDescription varchar(255))");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Certifications (CertificationNumber integer, CertificationName varchar(30), DateObtained varchar(30), ExpiryDate varchar(30), TechnicianId integer)");
-    System.out.println("Boot Successful: Pogrymby");
+    stmt.executeUpdate("CREATE SCHEMA IF NOT EXISTS public");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS PartDescriptions (PartName varchar(30), PartDescription varchar(255), PRIMARY KEY (PartName))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS PartList (PartId serial, PartName varchar(30), PRIMARY KEY (partID), FOREIGN KEY (PartName) REFERENCES PartDescriptions ON DELETE NO ACTION ON UPDATE NO ACTION)"); // this as well as part descriptions were done wrong, with the foreign key not actually being a primary key
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffRoles (StaffId serial, Role varchar(30), PRIMARY KEY (StaffId))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Tools (ToolId serial, ToolName varchar(30),PRIMARY KEY (ToolId))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS AddressBook (Address varchar(50), PostalCode varchar(9),PRIMARY KEY (Address) )");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID varchar(30), Brand varchar(30), PRIMARY KEY (WarrantyID))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyDivisions (Brand varchar(30), EmailContact varchar(30), PRIMARY KEY (Brand))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Vendors (VendorName varchar(30), EmailContact varchar(30), BillingShippingAddress varchar(30), PRIMARY KEY (VendorName))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial, Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50),PRIMARY KEY (CustIdentifier), FOREIGN KEY (Address) REFERENCES AddressBook ON DELETE SET NULL ON UPDATE CASCADE)");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID varchar(30), StartDate varchar(14), EndDate varchar(14), Description varchar(300), PRIMARY KEY (OrderNum), FOREIGN KEY (CustomerNum) REFERENCES Customers ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (ClaimID) REFERENCES WarrantyClaim ON DELETE SET NULL ON UPDATE CASCADE)");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WorkReports (OrderNum integer, StaffID integer, Message varchar(50), Date varchar(14), CloseWorkOrder varchar(10), PRIMARY KEY (OrderNum, Date),FOREIGN KEY (StaffID) REFERENCES StaffRoles ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY (OrderNum) REFERENCES WorkOrders ON DELETE NO ACTION ON UPDATE NO ACTION)"); //there was a mistake in this, adding a foreign key custID that shouldnt have been there
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ToolUsageReports (Message varchar(30), RepairID integer, ToolID integer, Date varchar(14), FOREIGN KEY (RepairID) REFERENCES WorkOrders ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY (ToolID) REFERENCES Tools ON DELETE NO ACTION ON UPDATE NO ACTION)");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS PartUsageReports (Message varchar(30), RepairID integer, PartID integer, Date varchar(14), FOREIGN KEY (RepairID) REFERENCES WorkOrders ON DELETE NO ACTION ON UPDATE NO ACTION, FOREIGN KEY (PartID) REFERENCES PartList ON DELETE NO ACTION ON UPDATE NO ACTION)");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffDetails (StaffId serial, Name varchar(30), PhoneNumber varchar(30), FOREIGN KEY (StaffId) REFERENCES StaffRoles ON DELETE CASCADE ON UPDATE CASCADE)");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Certifications (CertificationNumber integer, CertificationName varchar(30), DateObtained varchar(30), ExpiryDate varchar(30), TechnicianId integer,PRIMARY KEY (CertificationName, CertificationNumber), FOREIGN KEY (TechnicianID) REFERENCES StaffRoles ON DELETE CASCADE ON UPDATE CASCADE)");
+    System.out.println("Boot Successful: Pogrimby"); // we also somehow spelt references wrong a couple times
   }
   catch (Exception e) {
     System.out.println(e);
