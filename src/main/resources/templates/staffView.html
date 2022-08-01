@@ -39,33 +39,71 @@
 <body style="font-family: Quicksand, sans-serif;">
   <div class="db-container">
     <h1 style="font-weight: bolder;">View Staff Members</h1><br>
-
     <p1>
     <br>
+    <div>hideFullyCertified: <input type="checkbox" onclick="updatefilters()" id="hideuncertified"></div>
+    <div>hideUncertified: <input type="checkbox" onclick="updatefilters()" id="hidecertified"></div>
     <table id="VendorsViewTable"class="styled-table">
       <tr class="table-header" style="color: rgb(0, 0, 0);">
         <th class="header-name"> Staff ID</th>
         <th class="header-name"> Name</th>
         <th class="header-name"> Phone Number</th>
         <th class="header-name"> Role</th>
+        <th class="header-name"> Number of Certifications</th>
         
-        <tr th:each="n:${Staff}">
-          <td th:text="${n.StaffId}"></td>
-          <td th:text="${n.Name}"></td>
-          <td th:text="${n.PhoneNumber}"></td>
-          <td th:text="${n.Role}"></td>
-
-          <td>
-            <form th:action="@{/StaffEdit/{Name}(Name=${n.Name})}">
-              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
-            </form>
-          </td>
+        <tr th:each="n:${UncertifiedStaff}" th:class="Uncertified">
+          <td th:text="${n.FirstString}"></td>
+          <td th:text="${n.SecondString}"></td>
+          <td th:text="${n.ThirdString}"></td>
+          <td th:text="${n.FourthString}"></td>
+          <td th:text="${n.FifthString}"></td>
+        <td>
+          <form th:action="@{/WorkOrderEdit/{OrderNum}(OrderNum=${n.FirstString})}">
+            <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
+          </form>
+        </td>
         </tr>
+        
+        <tr th:each="n:${FullyCertifiedStaff}" th:class="FullyCertified">
+          <td th:text="${n.FirstString}"></td>
+          <td th:text="${n.SecondString}"></td>
+          <td th:text="${n.ThirdString}"></td>
+          <td th:text="${n.FourthString}"></td>
+          <td th:text="${n.FifthString}"></td>
+        <td>
+          <form th:action="@{/WorkOrderEdit/{OrderNum}(OrderNum=${n.FirstString})}">
+            <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
+          </form>
+        </td>
+        </tr>
+
         
     </table>
   <br>
     </p1>
   </div>
-  <script type="text/javascript"></script>
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script th:inline="javascript">
+    function updatefilters()
+    {
+        if (document.getElementById('hideuncertified').checked)
+        {
+          $('.Uncertified').hide();
+        }
+        else
+        {
+          $('.Uncertified').show();
+        }
+        if (document.getElementById('hidecertified').checked)
+        {
+          $('.FullyCertified').hide();
+        }
+        else
+        {
+          $('.FullyCertified').show();
+        }
+    }
+  updatefilters();
+  </script>
 </body>
 </html>

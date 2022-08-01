@@ -52,25 +52,30 @@ public class StaffController {
     String StaffView(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      ResultSet rs1 = stmt.executeQuery(("SELECT * FROM StaffDetails"));
-      ArrayList<Staff> dataList = new ArrayList<Staff>();
-      while (rs1.next()) {
-        
-        Staff obj = new Staff();
-        obj.setName(rs1.getString("Name"));
-        obj.setPhoneNumber(rs1.getString("PhoneNumber"));
-        obj.setStaffId(rs1.getInt("StaffId"));
-        
+      ResultSet rs = stmt.executeQuery(("SELECT sd.staffid,sd.Name,sd.phonenumber,sr.Role,count(c.CertificationName) FROM staffdetails sd,staffroles sr,certifications c WHERE sd.staffid=sr.staffid AND sd.staffid = c.technicianid AND EXISTS(select c.certificationname from certifications c except (select c.certificationname from certifications c where c.technicianid=sd.staffid)) GROUP BY (sd.staffid,sd.phonenumber,sd.Name,sr.Role)"));
+      ArrayList<TableArray> dataList = new ArrayList<TableArray>();
+      while (rs.next()) {
+        TableArray obj = new TableArray();
+        obj.setFirstString(rs.getString("staffid"));
+        obj.setSecondString(rs.getString("name"));
+        obj.setThirdString(rs.getString("phonenumber"));
+        obj.setFourthString(rs.getString("role"));
+        obj.setFifthString(rs.getString("count"));
         dataList.add(obj);
       }
-      ResultSet rs2 = stmt.executeQuery(("SELECT * FROM StaffRoles"));
-      int x = 0;
-      while(rs2.next())
-      {
-        dataList.get(x).setRole(rs2.getString("Role"));
-        x++;
+      model.put("UncertifiedStaff", dataList);
+      ResultSet rs3 = stmt.executeQuery(("SELECT sd.staffid,sd.Name,sd.phonenumber,sr.Role,count(c.CertificationName) FROM staffdetails sd,staffroles sr,certifications c WHERE sd.staffid=sr.staffid AND sd.staffid = c.technicianid AND NOT EXISTS(select c.certificationname from certifications c except (select c.certificationname from certifications c where c.technicianid=sd.staffid)) GROUP BY (sd.staffid,sd.phonenumber,sd.Name,sr.Role)"));
+      ArrayList<TableArray> dataList3 = new ArrayList<TableArray>();
+      while (rs3.next()) {
+        TableArray obj = new TableArray();
+        obj.setFirstString(rs3.getString("staffid"));
+        obj.setSecondString(rs3.getString("name"));
+        obj.setThirdString(rs3.getString("phonenumber"));
+        obj.setFourthString(rs3.getString("role"));
+        obj.setFifthString(rs3.getString("count"));
+        dataList3.add(obj);
       }
-      model.put("Staff", dataList);
+      model.put("FullyCertifiedStaff", dataList3);
       return "staffView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
