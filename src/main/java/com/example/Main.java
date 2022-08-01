@@ -31,7 +31,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Map;
 
 
 @Controller
@@ -88,11 +90,31 @@ public class Main implements CommandLineRunner {
       stmt.executeUpdate("CREATE SCHEMA public");
       System.out.println("Wipe Complete: Reinitializing");
       run("");
+      return "index";
     }
     catch (Exception e) {
       System.out.println(e);
+      return "error";
     }
-    return "index";
+
+  }
+
+  @RequestMapping("/statsView")
+  String statsView(Map<String, Object> model) {
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      ResultSet rs = stmt.executeQuery("select AVG(g.count) from (select count(*) from customers c, workorders w where c.custidentifier=w.customernum group by c.custidentifier) g");
+      rs.next();
+      model.put("averagerepairnum",rs.getString("avg"));
+      rs = stmt.executeQuery("select AVG(g.count) from (select count(*) from staffdetails s, certifications c where s.staffid=c.technicianid group by s.staffid) g");
+      rs.next();
+      model.put("averagecertificationnum",rs.getString("avg"));
+      return "statsview";
+    }
+    catch (Exception e) {
+      System.out.println(e);
+      return "error";
+    }
   }
 
   @Bean

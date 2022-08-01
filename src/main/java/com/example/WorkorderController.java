@@ -133,6 +133,7 @@ public class WorkorderController {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
       String sql;
+      workorder.setDescription(workorder.getDescription().replace("'",""));
       if(workorder.getClaimID().equals("")) {sql = "INSERT INTO Workorders (CustomerNum,StartDate,Description) VALUES ("+workorder.getCustomerNum()+", '"+workorder.getStartDate()+"', '"+workorder.getDescription()+"')";}
       else{sql = "INSERT INTO Workorders (CustomerNum,ClaimID,StartDate,Description) VALUES ("+workorder.getCustomerNum()+", '"+workorder.getClaimID()+"', '"+workorder.getStartDate()+"', '"+workorder.getDescription()+"')";}
       System.out.println(sql);

@@ -97,6 +97,7 @@ public class WorkReportController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
+      workReport.setMessage(workReport.getMessage().replace("'",""));
       String sql = "INSERT INTO WorkReports (OrderNum, StaffID, Message, Date, CloseWorkOrder) VALUES ("+workReport.getOrderNum()+", "+workReport.getStaffID()+", '"+workReport.getMessage()+"', '"+workReport.getDate()+"', '"+workReport.getCloseWorkorder()+"')";
       System.out.println(sql);
       stmt.executeUpdate(sql);
