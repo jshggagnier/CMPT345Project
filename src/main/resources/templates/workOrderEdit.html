@@ -24,7 +24,7 @@
     <form action="#" method="post" th:action="@{/workOrderEditForm}" th:object="${WorkOrder}">
       <div class="form-name" hidden>Order Num<input style="font-family: Quicksand, sans-serif;" type="number" id="OrderNum" th:field="*{OrderNum}" th:value="${WorkOrder.OrderNum}" required /></div>
       <div class="form-name">Date: <input style="font-family: Quicksand, sans-serif;" type="date" id="DateSubmitted" th:field="*{StartDate}" th:value="${WorkOrder.StartDate}" placeholder="Date Submitted the Work Order" required /></div>
-      <div class="form-name">StaffID: <body th:text="${Customer.Name}"></body></div>      
+      <div class="form-name">Customer Name: <body th:text="${Customer.Name}"></body></div>      
       <div class="form-name">Message: <input style="font-family: Quicksand, sans-serif;" type="text" id="CustName" th:field="*{Description}" th:value="${WorkOrder.Description}" placeholder="Short Description of Fault" required /></div>
       <div class="form-name">Warranty claim ID: <input style="font-family: Quicksand, sans-serif;" type="text" id="ClaimID" th:field="*{ClaimID}" th:value="${WorkOrder.ClaimID}" placeholder="Warranty Claim ID" required /></div>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
@@ -77,6 +77,12 @@
   </tr>
   </table>
   <button th:onclick="|window.location.href='/toolusageReportSubmit'|" class="SubmitButton">Submit a Tool Usage Report</button>
+  
+  <h2>Warning: The Below Action Cannot be Undone</h2>
+  <form th:action="@{/WorkOrderDelete/{id}(id=${WorkOrder.OrderNum})}" onsubmit="return confirm('Are you sure you want to delete this work item?');">
+    <button type="submit" value="Delete">Delete this Workorder</button>
+  </form>
+
   </main>
   <script type="text/javascript"></script>
 </body>

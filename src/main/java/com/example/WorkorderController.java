@@ -236,4 +236,18 @@ public class WorkorderController {
     }
   }
 
+  @GetMapping("/WorkOrderDelete/{nid}")
+  String LoadFormWorkOrderDelete(Map<String, Object> model, @PathVariable String nid) {
+      try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      String SQL = ("Delete FROM Workorders WHERE OrderNum = " + nid);
+      System.out.println(SQL); // this should only ever print 1, please...
+      stmt.executeUpdate(SQL);
+      return "redirect:/workOrderView";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+  }
+
 }
