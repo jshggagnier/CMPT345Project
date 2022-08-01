@@ -37,8 +37,8 @@
         <option selected value=''>No Warranty Claim</option>
         <option th:each="claim : ${WarrantyClaims}" th:value="${claim.WarrantyID}" th:text="${claim.WarrantyID}"></option>
       </select>
-      <br><a th:href="@{/warrantyClaimSubmit}">(Add New WarrantyClaim)</a> 
-      <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
+      <br><a th:href="@{/warrantyClaimSubmit}">(Add New WarrantyClaim)</a>
+      <br><input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>
   </div>

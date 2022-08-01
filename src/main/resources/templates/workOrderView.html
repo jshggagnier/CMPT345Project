@@ -44,6 +44,7 @@
     <div>Hide Finished Orders: <input type="checkbox" onclick="updatefilters()" id="hidefinished"></div>
     <div>Hide Unfinished Orders: <input type="checkbox" onclick="updatefilters()" id="hideunfinished"></div>
     <div>Show Only New Orders: <input type="checkbox" onclick="updatefilters()" id="showonlynew"></div>
+    <a th:href="@{/workOrderSubmit}">(Submit New Workorder)</a>
     <table id="WorkOrderViewTable"class="styled-table">
       <tr class="table-header">
         <th class="header-name">Order Number </th>
@@ -54,7 +55,7 @@
         <th class="header-name">Claim ID</th>
         <th class="header-name">Edit</th>
       </tr>
-      <tr th:each="n:${openWorkOrders}" th:id="open">
+      <tr th:each="n:${openWorkOrders}" th:class="open">
           <td th:text="${n.FirstString}"></td>
           <td th:text="${n.SecondString}"></td>
           <td th:text="${n.ThirdString}"></td>
@@ -67,7 +68,7 @@
           </form>
         </td>
       </tr>
-        <tr th:each="a:${closedWorkOrders}" th:id="closed">
+        <tr th:each="a:${closedWorkOrders}" th:class="closed">
           <td th:text="${a.FirstString}"></td>
           <td th:text="${a.SecondString}"></td>
           <td th:text="${a.ThirdString}"></td>
@@ -80,7 +81,7 @@
             </form>
           </td>
         </tr>
-        <tr th:each="b:${newWorkOrders}" th:id="new" hidden>
+        <tr th:each="b:${newWorkOrders}" th:class="new">
           <td th:text="${b.FirstString}"></td>
           <td th:text="${b.SecondString}"></td>
           <td th:text="${b.ThirdString}"></td>
@@ -97,7 +98,7 @@
     <br>
     </p1>
   </div>
-  <script type="text/javascript"></script>
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script th:inline="javascript">
     function updatefilters()
     {
@@ -105,29 +106,30 @@
         {
           document.getElementById('hidefinished').checked = true;
           document.getElementById('hideunfinished').checked = true;
-          document.getElementById('new').hidden = false;
+          $('.new').show();
         }
         else
         {
-          document.getElementById('new').hidden = true;
+          $('.new').hide();
         }
         if (document.getElementById('hidefinished').checked)
         {
-          document.getElementById('closed').hidden = true;
+          $('.closed').hide();
         }
         else
         {
-          document.getElementById('closed').hidden = false;
+          $('.closed').show();
         }
         if (document.getElementById('hideunfinished').checked)
         {
-          document.getElementById('open').hidden = true;
+          $('.open').hide();
         }
         else
         {
-          document.getElementById('open').hidden = false;
+          $('.open').show();
         }
     }
+  updatefilters();
   </script>
 </body>
 </html>

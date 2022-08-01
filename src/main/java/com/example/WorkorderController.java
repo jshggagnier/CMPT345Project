@@ -107,10 +107,9 @@ public class WorkorderController {
         dataList2.add(obj);
       }
       model.put("openWorkOrders", dataList2);
-      ResultSet rs3 = stmt.executeQuery(("SELECT OrderNum,startdate,enddate,ClaimID,Description,name FROM Workorders,Customers WHERE NOT EXISTS(SELECT * FROM Workorders,WorkReports WHERE Workorders.OrderNum = Workreports.OrderNum) AND Workorders.CustomerNum=Customers.custidentifier"));
+      ResultSet rs3 = stmt.executeQuery(("SELECT OrderNum,startdate,enddate,ClaimID,Description,name FROM Workorders,Customers WHERE Workorders.OrderNum NOT IN(SELECT Workorders.OrderNum FROM Workorders,WorkReports WHERE Workorders.OrderNum = Workreports.OrderNum) AND Workorders.CustomerNum=Customers.custidentifier"));
       ArrayList<TableArray> dataList3 = new ArrayList<TableArray>();
       while (rs3.next()) {
-        System.out.println("found one");
         TableArray obj = new TableArray();
         obj.setFirstString(rs3.getString("OrderNum"));
         obj.setThirdString(rs3.getString("startdate"));
