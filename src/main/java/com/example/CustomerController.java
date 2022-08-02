@@ -79,8 +79,8 @@ public class CustomerController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      String sql1 = "REPLACE INTO customers (Name, Email, PhoneNumber, Address) VALUES ('"+Customer.getName()+"', '"+Customer.getEmail()+"', '"+Customer.getPhoneNumber()+"', '"+Customer.getAddress()+"')";
-      String sql2 = "REPLACE INTO AddressBook (Address, PostalCode) VALUES ('"+Customer.getAddress()+"', '"+Customer.getPostalCode()+"')";
+      String sql1 = "INSERT INTO customers (Name, Email, PhoneNumber, Address) VALUES ('"+Customer.getName()+"', '"+Customer.getEmail()+"', '"+Customer.getPhoneNumber()+"', '"+Customer.getAddress()+"')";
+      String sql2 = "INSERT INTO AddressBook (Address, PostalCode) VALUES ('"+Customer.getAddress()+"', '"+Customer.getPostalCode()+"') ON CONFLICT (Address) DO UPDATE SET PostalCode = EXCLUDED.PostalCode";
       System.out.println(sql2);
       stmt.executeUpdate(sql2);
       System.out.println(sql1);
@@ -97,8 +97,8 @@ public class CustomerController {
   String LoadFormWorkOrderDelete(Map<String, Object> model, @PathVariable String nid) {
       try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
+      
       String SQL = ("Delete FROM customers WHERE CustIdentifier = " + nid);
-
       System.out.println(SQL); // this should only ever print 1, please...
       stmt.executeUpdate(SQL);
       return "redirect:/customerView";
