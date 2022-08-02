@@ -63,6 +63,16 @@ public class StaffController {
         obj.setFifthString(rs.getString("count"));
         dataList.add(obj);
       }
+      ResultSet rs2 = stmt.executeQuery(("SELECT sd.staffid,sd.Name,sd.phonenumber,sr.Role FROM staffdetails sd,staffroles sr WHERE sd.staffid=sr.staffid AND sd.staffid NOT IN (SELECT sd.staffid FROM staffdetails sd,staffroles sr,certifications c WHERE sd.staffid=sr.staffid AND sd.staffid = c.technicianid GROUP BY (sd.staffid,sd.phonenumber,sd.Name,sr.Role)) GROUP BY (sd.staffid,sd.phonenumber,sd.Name,sr.Role)"));
+      while (rs2.next()) {
+        TableArray obj = new TableArray();
+        obj.setFirstString(rs2.getString("staffid"));
+        obj.setSecondString(rs2.getString("name"));
+        obj.setThirdString(rs2.getString("phonenumber"));
+        obj.setFourthString(rs2.getString("role"));
+        obj.setFifthString("0");
+        dataList.add(obj);
+      } //this handles those of the staff who have NO certifications (who probably are uncertified :D)
       model.put("UncertifiedStaff", dataList);
       ResultSet rs3 = stmt.executeQuery(("SELECT sd.staffid,sd.Name,sd.phonenumber,sr.Role,count(c.CertificationName) FROM staffdetails sd,staffroles sr,certifications c WHERE sd.staffid=sr.staffid AND sd.staffid = c.technicianid AND NOT EXISTS(select c.certificationname from certifications c except (select c.certificationname from certifications c where c.technicianid=sd.staffid)) GROUP BY (sd.staffid,sd.phonenumber,sd.Name,sr.Role)"));
       ArrayList<TableArray> dataList3 = new ArrayList<TableArray>();
