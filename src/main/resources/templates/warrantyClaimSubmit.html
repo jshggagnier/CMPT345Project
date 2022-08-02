@@ -29,7 +29,7 @@
         <option th:each="brand : ${divisions}" th:value="${brand.Brand}" th:text="${brand.Brand}"></option>
       </select>
       </div>
-      <div><button th:onclick="|window.location.href='/staffSubmit'|" class="SubmitButton">Add A New Warranty Division</button></div>
+      <div><a th:href="@{/warrantyDivisionSubmit}">Submit Warranty Division</a></div>
       <br>
       <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
