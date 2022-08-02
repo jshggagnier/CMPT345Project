@@ -52,12 +52,6 @@
           <td th:text="${n.VendorName}"></td>
           <td th:text="${n.EmailContact}"></td>
           <td th:text="${n.BillingShippingAddress}"></td>
-
-          <td>
-            <form th:action="@{/vendorEdit/{VendorName}(VendorName=${n.VendorName})}">
-              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
-            </form>
-          </td>
         </tr>
         
     </table>

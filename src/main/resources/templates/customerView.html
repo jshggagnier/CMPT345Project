@@ -59,8 +59,8 @@
           <td th:text="${n.Address}"></td>
           <td th:text="${n.PostalCode}"></td>
           <td>
-            <form th:action="@{/WorkOrderEdit/{CustIdentifier}(CustIdentifier=${n.CustIdentifier})}">
-              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
+            <form th:action="@{/CustomerDelete/{CustIdentifier}(CustIdentifier=${n.CustIdentifier})}" onsubmit="return confirm('Are you sure you want to delete this Customer?');">
+              <button style="border: none; background:transparent;" type="submit" value="Edit">Delete</button>
             </form>
           </td>
         </tr>

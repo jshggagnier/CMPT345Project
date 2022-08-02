@@ -23,8 +23,15 @@
   <h2>Enter the details for the new Warranty Claim</h2>
   <div class="form-data">
     <form action="#" method="post" th:action="@{/warrantyClaimSubmitForm}" th:object="${WarrantyClaim}">
-	    <div class="form-name">Id:<br> <input style="font-family: Quicksand, sans-serif;" type="text" id="WarrantyID" th:field="*{WarrantyID}" placeholder="Id of the Warranty" required /></div> 
-	    <div class="form-name">Brand:<br> <input style="font-family: Quicksand, sans-serif;" type="text" id="Brand" th:field="*{Brand}" placeholder="Brand of the Warranty" required /></div> 
+	    <div class="form-name">Enter the Claim ID provided by the brand below:<br> <input style="font-family: Quicksand, sans-serif;" type="text" id="WarrantyID" th:field="*{WarrantyID}" placeholder="Id of the Warranty" required /></div> 
+	    <div>Brand: 
+      <select th:field="*{Brand}">
+        <option th:each="brand : ${divisions}" th:value="${brand.Brand}" th:text="${brand.Brand}"></option>
+      </select>
+      </div>
+      <div><button th:onclick="|window.location.href='/staffSubmit'|" class="SubmitButton">Add A New Warranty Division</button></div>
+      <br>
+      <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
     </form>

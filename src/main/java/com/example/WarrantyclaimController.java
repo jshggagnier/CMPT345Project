@@ -44,9 +44,24 @@ public class WarrantyclaimController {
 
   @GetMapping("/warrantyClaimSubmit")
   String warrantyClaimSubmit(Map<String, Object> model) {
-    Warrantyclaim warrantyclaim = new Warrantyclaim();
-    model.put("WarrantyClaim", warrantyclaim);
-    return "warrantyClaimSubmit";
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      ResultSet rs = stmt.executeQuery(("SELECT * FROM WarrantyDivisions"));
+      ArrayList<Warrantydivision> dataList = new ArrayList<Warrantydivision>();
+      while (rs.next()) {
+        Warrantydivision obj = new Warrantydivision();
+        obj.setBrand(rs.getString("Brand"));
+        obj.setEmailContact(rs.getString("EmailContact"));
+        dataList.add(obj);
+      }
+      model.put("divisions", dataList);
+      Warrantyclaim warrantyclaim = new Warrantyclaim();
+      model.put("WarrantyClaim", warrantyclaim);
+      return "warrantyClaimSubmit";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
   }
 
   @GetMapping("/warrantyClaimView")

@@ -53,7 +53,7 @@ public class CustomerController {
   String viewcustomers(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery(("SELECT * FROM customers"));
+      ResultSet rs = stmt.executeQuery(("SELECT * FROM customers c,AddressBook a where c.address=a.address"));
       ArrayList<Customer> dataList = new ArrayList<Customer>();
       while (rs.next()) {
         Customer obj = new Customer();
@@ -61,15 +61,9 @@ public class CustomerController {
         obj.setName(rs.getString("Name"));
         obj.setEmail(rs.getString("Email"));
         obj.setPhoneNumber(rs.getString("PhoneNumber"));
+        obj.setPostalCode(rs.getString("PostalCode"));
         obj.setAddress(rs.getString("Address"));
         dataList.add(obj);
-      }
-      ResultSet rs2 = stmt.executeQuery(("SELECT * FROM AddressBook"));
-      int x = 0;
-      while(rs2.next())
-      {
-        dataList.get(x).setPostalCode(rs2.getString("PostalCode"));
-        x++;
       }
       model.put("Customers", dataList);
       connection.close();
@@ -85,8 +79,8 @@ public class CustomerController {
     // Establishing connection with database
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      String sql1 = "INSERT INTO customers (Name, Email, PhoneNumber, Address) VALUES ('"+Customer.getName()+"', '"+Customer.getEmail()+"', '"+Customer.getPhoneNumber()+"', '"+Customer.getAddress()+"')";
-      String sql2 = "INSERT INTO AddressBook (Address, PostalCode) VALUES ('"+Customer.getAddress()+"', '"+Customer.getPostalCode()+"')";
+      String sql1 = "REPLACE INTO customers (Name, Email, PhoneNumber, Address) VALUES ('"+Customer.getName()+"', '"+Customer.getEmail()+"', '"+Customer.getPhoneNumber()+"', '"+Customer.getAddress()+"')";
+      String sql2 = "REPLACE INTO AddressBook (Address, PostalCode) VALUES ('"+Customer.getAddress()+"', '"+Customer.getPostalCode()+"')";
       System.out.println(sql2);
       stmt.executeUpdate(sql2);
       System.out.println(sql1);
@@ -99,22 +93,15 @@ public class CustomerController {
     }
   }
 
-  @GetMapping("/customerEdit/{nid}")
-  String LoadFormcustomerEdit(Map<String, Object> model, @PathVariable String nid) {
+  @GetMapping("/CustomerDelete/{nid}")
+  String LoadFormWorkOrderDelete(Map<String, Object> model, @PathVariable String nid) {
       try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      ResultSet rs = stmt.executeQuery(("SELECT * FROM customers WHERE OrderNum = " + nid)); // this should only ever run once, since OrderNum is serial
-      Customer obj = new Customer();
-      while (rs.next()) {
-        obj.setCustIdentifier(rs.getInt("CustIdentifier"));
-        obj.setName(rs.getString("Name"));
-        obj.setEmail(rs.getString("Email"));
-        obj.setPhoneNumber(rs.getString("PhoneNumber"));
-        obj.setAddress(rs.getString("Address"));
-      }
-      model.put("Customer", obj);
-      connection.close();
-      return "customerEdit";
+      String SQL = ("Delete FROM customers WHERE CustIdentifier = " + nid);
+
+      System.out.println(SQL); // this should only ever print 1, please...
+      stmt.executeUpdate(SQL);
+      return "redirect:/customerView";
     } catch (Exception e) {
       model.put("message", e.getMessage());
       return "error";

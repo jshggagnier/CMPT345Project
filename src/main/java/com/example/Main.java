@@ -32,7 +32,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -60,8 +59,8 @@ public class Main implements CommandLineRunner {
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS StaffRoles (StaffId serial, Role varchar(30), PRIMARY KEY (StaffId))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Tools (ToolId serial, ToolName varchar(30),PRIMARY KEY (ToolId))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS AddressBook (Address varchar(50), PostalCode varchar(9),PRIMARY KEY (Address) )");
-    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID varchar(30), Brand varchar(30), PRIMARY KEY (WarrantyID))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyDivisions (Brand varchar(30), EmailContact varchar(30), PRIMARY KEY (Brand))");
+    stmt.executeUpdate("CREATE TABLE IF NOT EXISTS WarrantyClaim (WarrantyID varchar(30), Brand varchar(30), PRIMARY KEY (WarrantyID), FOREIGN KEY (Brand) REFERENCES warrantyDivisions ON DELETE CASCADE ON UPDATE NO ACTION)");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Vendors (VendorName varchar(30), EmailContact varchar(30), BillingShippingAddress varchar(30), PRIMARY KEY (VendorName))");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS customers (CustIdentifier serial, Name varchar(50), Email varchar(50), PhoneNumber varchar(20), Address varchar(50),PRIMARY KEY (CustIdentifier), FOREIGN KEY (Address) REFERENCES AddressBook ON DELETE SET NULL ON UPDATE CASCADE)");
     stmt.executeUpdate("CREATE TABLE IF NOT EXISTS Workorders (OrderNum serial,CustomerNum integer, ClaimID varchar(30), StartDate varchar(14), EndDate varchar(14), Description varchar(300), PRIMARY KEY (OrderNum), FOREIGN KEY (CustomerNum) REFERENCES Customers ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (ClaimID) REFERENCES WarrantyClaim ON DELETE SET NULL ON UPDATE CASCADE)");

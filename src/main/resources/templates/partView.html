@@ -52,11 +52,6 @@
           <td th:text="${n.PartID}"></td>
           <td th:text="${n.PartName}"></td>
           <td th:text="${n.PartDescription}"></td>
-          <td>
-            <form th:action="@{/PartEdit/{PartID}(PartID=${n.PartID})}">
-              <button style="border: none; background:transparent;" type="submit" value="Edit"><i style="color:#00196A" class="fa fa-cog fa-lg"></i></button>
-            </form>
-          </td>
         </tr>
         
     </table>
