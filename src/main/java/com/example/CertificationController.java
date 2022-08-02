@@ -44,9 +44,25 @@ public class CertificationController {
 
   @GetMapping("/certificationSubmit")
   String certificationSubmit(Map<String, Object> model) {
-    Certification certification = new Certification();
-    model.put("Certification", certification);
-    return "certificationSubmit";
+    try (Connection connection = dataSource.getConnection()) {
+      Statement stmt = connection.createStatement();
+      ResultSet rs = stmt.executeQuery(("SELECT Name,StaffId FROM StaffDetails"));
+      ArrayList<Staff> dataList = new ArrayList<Staff>();
+      while (rs.next()) {
+        Staff obj = new Staff();
+        obj.setName(rs.getString("Name"));
+        obj.setStaffId(rs.getInt("StaffId"));
+        dataList.add(obj);
+      }
+      model.put("Technicians", dataList);
+      Certification certification = new Certification();
+      model.put("Certification", certification);
+      return "certificationSubmit";
+    } catch (Exception e) {
+      model.put("message", e.getMessage());
+      return "error";
+    }
+
   }
 
   @GetMapping("/certificationView")

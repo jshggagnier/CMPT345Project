@@ -40,8 +40,11 @@
                 th:field="*{ExpiryDate}" placeholder="Expiry Date of the Certification" required />
       <br>
       <div class="form-name">Technician Id</div>
-      <input style="font-family: Quicksand, sans-serif;" type="text" id="TechnicianID" 
-                th:field="*{TechnicianId}" placeholder="Technician Id on the Certification" required />
+      <select th:field="*{TechnicianId}">
+        <option th:each="Technician : ${Technicians}" th:value="${Technician.StaffId}" th:text="${Technician.Name}"></option>
+      </select>
+      <br>
+      <button th:onclick="|window.location.href='/staffSubmit'|" class="SubmitButton">Add Staff Member</button>
       <br>
       <input style="font-family: Quicksand, sans-serif;" type="submit" value="Submit Data" />
       <input style="font-family: Quicksand, sans-serif;" class="reset" type="button" onclick="resetform()" value="Reset">
