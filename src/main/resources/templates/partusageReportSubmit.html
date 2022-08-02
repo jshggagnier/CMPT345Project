@@ -31,7 +31,7 @@
           <option th:each="Part : ${Parts}" th:value="${Part.PartID}" th:text="${Part.PartName}"></option>
         </select>
       </div>
-      <button th:onclick="|window.location.href='/partSubmit'|" class="SubmitButton">Submit a Part</button>
+      <a th:href="@{/partSubmit}">Submit Part</a>
       <div class="form-name" style="font-weight: bolder;">Choose an Active Repair for this report: 
       <select th:field="*{RepairID}">
         <option th:each="order : ${openWorkOrders}" th:value="${order.OrderNum}" th:text="${order.Description}"></option>
